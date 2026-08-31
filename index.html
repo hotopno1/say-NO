@@ -1,11 +1,10 @@
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>거절 디펜스 🛡️ — DESC 훈련 아케이드</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;800;900&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&family=Black+Han+Sans&display=swap" rel="stylesheet">
 <style>
 :root {
   --primary: #7c3aed;
@@ -20,21 +19,22 @@
   --bg-card-border: #334155;
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.4);
+  --radius: 18px;
+  --radius-sm: 12px;
+  --shadow-glow: 0 0 25px rgba(124, 58, 237, 0.45);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body {
   font-family: 'Noto Sans KR', sans-serif;
   background-color: var(--bg-dark);
   background-image: 
-    radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.18) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.15) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.22) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.18) 0px, transparent 50%);
   color: var(--text-main);
   overflow-x: hidden;
   min-height: 100vh;
-  padding-bottom: 30px;
+  padding-bottom: 50px;
+  font-size: 17px;
 }
 
 /* ===== GAME HUD (TOP BAR) ===== */
@@ -42,56 +42,56 @@ body {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 1000;
-  background: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(12px);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-  padding: 10px 16px;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+  padding: 12px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
 }
-.hud-item { display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 0.95rem; }
-.hud-hp { display: flex; gap: 4px; font-size: 1.2rem; }
+.hud-item { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.15rem; }
+.hud-hp { display: flex; gap: 6px; font-size: 1.45rem; }
 .hud-hp .heart { transition: transform 0.3s, filter 0.3s; }
 .hud-hp .heart.lost { filter: grayscale(1) opacity(0.25); transform: scale(0.75); }
-.hud-score-val { color: var(--accent-yellow); font-family: 'Black Han Sans', sans-serif; font-size: 1.2rem; letter-spacing: 0.5px; }
+.hud-score-val { color: var(--accent-yellow); font-family: 'Black Han Sans', sans-serif; font-size: 1.45rem; letter-spacing: 1px; }
 .hud-combo-badge {
   background: linear-gradient(135deg, #f97316, #ef4444);
   color: #fff;
-  padding: 3px 10px;
+  padding: 5px 16px;
   border-radius: 99px;
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   font-weight: 900;
-  box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+  box-shadow: 0 0 14px rgba(249, 115, 22, 0.6);
   animation: pulseCombo 1.2s infinite;
   display: none;
 }
 @keyframes pulseCombo {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.08); box-shadow: 0 0 16px rgba(239, 68, 68, 0.8); }
+  50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(239, 68, 68, 0.9); }
 }
 .hud-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   color: #fff;
   border-radius: 50%;
-  width: 36px; height: 36px;
+  width: 42px; height: 42px;
   display: flex; align-items: center; justify-content: center;
-  cursor: pointer; font-size: 0.95rem;
+  cursor: pointer; font-size: 1.15rem;
   transition: all 0.2s;
 }
-.hud-btn:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
+.hud-btn:hover { background: rgba(255, 255, 255, 0.25); transform: scale(1.08); }
 
-/* ===== SCREEN WRAPPER ===== */
+/* ===== SCREEN WRAPPER (LAPTOP OPTIMIZED) ===== */
 .screen {
   display: none;
   opacity: 0;
   transform: translateY(15px);
   transition: opacity 0.3s ease, transform 0.3s ease;
-  max-width: 640px;
+  max-width: 880px; /* 노트북 화면에 맞게 대폭 확장 */
   margin: 0 auto;
-  padding: 76px 16px 40px;
+  padding: 92px 24px 40px;
 }
 .screen.active {
   display: block;
@@ -102,40 +102,40 @@ body {
 /* ===== COMMON GAME UI ===== */
 .game-card {
   background: var(--bg-card);
-  border: 2px solid var(--bg-card-border);
+  border: 2.5px solid var(--bg-card-border);
   border-radius: var(--radius);
-  padding: 22px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  padding: 32px 30px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
   position: relative;
   overflow: hidden;
 }
 .stage-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(124, 58, 237, 0.2);
-  border: 1.5px solid var(--primary-light);
+  gap: 8px;
+  background: rgba(124, 58, 237, 0.25);
+  border: 2px solid var(--primary-light);
   color: var(--primary-light);
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   font-weight: 800;
-  padding: 4px 14px;
+  padding: 6px 18px;
   border-radius: 99px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 .stage-title {
   font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(1.4rem, 5vw, 1.9rem);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   letter-spacing: 0.5px;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   line-height: 1.3;
 }
 .timer-bar-wrap {
   width: 100%;
-  height: 8px;
+  height: 12px;
   background: #334155;
   border-radius: 99px;
   overflow: hidden;
-  margin: 12px 0 18px;
+  margin: 14px 0 24px;
   position: relative;
 }
 .timer-bar-fill {
@@ -150,357 +150,362 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 800;
-  font-size: 1.05rem;
-  padding: 14px 28px;
+  font-size: 1.2rem;
+  padding: 16px 36px;
   border-radius: var(--radius-sm);
   border: none;
   cursor: pointer;
   transition: all 0.18s ease;
   width: 100%;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
   text-decoration: none;
 }
-.btn:active { transform: scale(0.97); }
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: scale(0.98); }
 .btn-primary {
   background: linear-gradient(135deg, #7c3aed, #06b6d4);
   color: #fff;
-  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.5);
+  box-shadow: 0 6px 24px rgba(124, 58, 237, 0.55);
 }
-.btn-primary:hover { box-shadow: 0 6px 26px rgba(124, 58, 237, 0.7); transform: translateY(-2px); }
+.btn-primary:hover { box-shadow: 0 8px 30px rgba(124, 58, 237, 0.75); }
 .btn-success { background: linear-gradient(135deg, #059669, #10b981); color: #fff; }
-.btn-outline { background: transparent; border: 2px solid rgba(255, 255, 255, 0.2); color: #fff; }
-.btn-outline:hover { background: rgba(255, 255, 255, 0.08); }
+.btn-outline { background: transparent; border: 2px solid rgba(255, 255, 255, 0.25); color: #fff; }
+.btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
 
 /* ===== SCREEN: START ===== */
 .hero-title {
   font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(2.4rem, 9vw, 3.6rem);
+  font-size: clamp(3rem, 7vw, 4.6rem);
   line-height: 1.15;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 50%, #facc15 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 12px rgba(124, 58, 237, 0.4));
+  filter: drop-shadow(0 6px 16px rgba(124, 58, 237, 0.45));
 }
 .hero-desc {
   color: var(--text-muted);
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 24px;
+  font-size: 1.25rem;
+  line-height: 1.7;
+  margin-bottom: 30px;
 }
 .quest-road-map {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 26px;
+  gap: 14px;
+  margin-bottom: 32px;
   text-align: left;
 }
 .quest-node {
-  background: rgba(30, 41, 59, 0.7);
-  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  background: rgba(30, 41, 59, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm);
-  padding: 12px 16px;
+  padding: 16px 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: transform 0.2s;
+  transition: transform 0.2s, border-color 0.2s;
 }
-.quest-node-left { display: flex; align-items: center; gap: 12px; }
-.quest-icon { font-size: 1.5rem; }
-.quest-name { font-weight: 800; font-size: 0.95rem; }
-.quest-sub { font-size: 0.78rem; color: var(--text-muted); }
-.quest-stars { color: var(--accent-yellow); font-size: 0.85rem; letter-spacing: 2px; }
+.quest-node:hover { transform: translateX(6px); border-color: var(--primary-light); }
+.quest-node-left { display: flex; align-items: center; gap: 16px; }
+.quest-icon { font-size: 2rem; }
+.quest-name { font-weight: 800; font-size: 1.15rem; }
+.quest-sub { font-size: 0.92rem; color: var(--text-muted); margin-top: 2px; }
+.quest-stars { color: var(--accent-yellow); font-size: 1.05rem; letter-spacing: 3px; font-weight: 900; }
 
 /* ===== STAGE 1: RADAR TYPE ATTACK ===== */
 .sit-box {
-  background: rgba(15, 23, 42, 0.8);
-  border: 2px solid #3b82f6;
+  background: rgba(15, 23, 42, 0.85);
+  border: 2.5px solid #3b82f6;
   border-radius: var(--radius);
-  padding: 18px;
-  margin-bottom: 18px;
+  padding: 24px;
+  margin-bottom: 22px;
   position: relative;
 }
-.sit-author { font-size: 0.85rem; font-weight: 800; color: #38bdf8; margin-bottom: 6px; }
-.sit-text { font-size: 1.05rem; font-weight: 700; line-height: 1.55; color: #f8fafc; }
+.sit-author { font-size: 1rem; font-weight: 800; color: #38bdf8; margin-bottom: 10px; }
+.sit-text { font-size: 1.35rem; font-weight: 700; line-height: 1.6; color: #f8fafc; }
 .type-btn-grid {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
 .type-btn {
-  background: rgba(30, 41, 59, 0.9);
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(30, 41, 59, 0.95);
+  border: 2.5px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-sm);
-  padding: 14px 16px;
+  padding: 18px 22px;
   color: #fff;
   font-weight: 800;
-  font-size: 1rem;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
   transition: all 0.15s ease;
 }
-.type-btn:hover { background: rgba(51, 65, 85, 0.9); border-color: var(--primary-light); transform: translateX(4px); }
+.type-btn:hover { background: rgba(51, 65, 85, 0.95); border-color: var(--primary-light); transform: translateX(6px); }
 .type-btn.correct { background: #065f46 !important; border-color: #34d399 !important; color: #a7f3d0 !important; }
 .type-btn.wrong { background: #991b1b !important; border-color: #f87171 !important; color: #fecaca !important; animation: shake 0.4s; }
 
 /* ===== STAGE 2: DESC PARTS HUNTING ===== */
 .target-sentence-card {
   background: linear-gradient(145deg, #1e293b, #0f172a);
-  border: 2.5px solid var(--secondary);
+  border: 3px solid var(--secondary);
   border-radius: var(--radius);
-  padding: 22px 18px;
+  padding: 30px 24px;
   text-align: center;
-  margin-bottom: 20px;
-  box-shadow: 0 0 24px rgba(6, 182, 212, 0.25);
-  min-height: 110px;
+  margin-bottom: 24px;
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.3);
+  min-height: 130px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   font-weight: 800;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 .desc-part-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 16px;
 }
 .desc-part-btn {
   background: rgba(30, 41, 59, 0.95);
   border-radius: var(--radius);
-  padding: 16px 12px;
+  padding: 22px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   cursor: pointer;
   transition: all 0.18s;
-  border: 2.5px solid transparent;
+  border: 3px solid transparent;
   user-select: none;
 }
-.desc-part-btn:active { transform: scale(0.95); }
-.desc-part-btn.btn-d { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
-.desc-part-btn.btn-e { border-color: #f97316; background: rgba(249, 115, 22, 0.1); }
-.desc-part-btn.btn-s { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
-.desc-part-btn.btn-c { border-color: #10b981; background: rgba(16, 185, 129, 0.1); }
-.part-letter { font-family: 'Black Han Sans', sans-serif; font-size: 1.8rem; line-height: 1; }
-.part-label { font-size: 0.85rem; font-weight: 800; color: var(--text-main); }
-.part-desc { font-size: 0.72rem; color: var(--text-muted); }
+.desc-part-btn:hover { transform: translateY(-3px); }
+.desc-part-btn:active { transform: scale(0.96); }
+.desc-part-btn.btn-d { border-color: #3b82f6; background: rgba(59, 130, 246, 0.12); }
+.desc-part-btn.btn-e { border-color: #f97316; background: rgba(249, 115, 22, 0.12); }
+.desc-part-btn.btn-s { border-color: #ef4444; background: rgba(239, 68, 68, 0.12); }
+.desc-part-btn.btn-c { border-color: #10b981; background: rgba(16, 185, 129, 0.12); }
+.part-letter { font-family: 'Black Han Sans', sans-serif; font-size: 2.4rem; line-height: 1; }
+.part-label { font-size: 1.1rem; font-weight: 800; color: var(--text-main); }
+.part-desc { font-size: 0.85rem; color: var(--text-muted); }
 
 /* ===== STAGE 3: 4-CHAIN COMBO PUZZLE ===== */
 .chain-indicator {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 .chain-dot {
-  width: 36px; height: 36px;
+  width: 46px; height: 46px;
   border-radius: 50%;
   background: #334155;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 900; font-size: 0.95rem;
+  font-weight: 900; font-size: 1.2rem;
   color: #94a3b8;
-  border: 2px solid transparent;
+  border: 2.5px solid transparent;
   transition: all 0.3s;
 }
-.chain-dot.active { background: var(--primary); color: #fff; border-color: var(--primary-light); transform: scale(1.15); box-shadow: 0 0 14px var(--primary); }
+.chain-dot.active { background: var(--primary); color: #fff; border-color: var(--primary-light); transform: scale(1.15); box-shadow: 0 0 18px var(--primary); }
 .chain-dot.done { background: #059669; color: #fff; border-color: #34d399; }
-.chain-arrow { color: #64748b; font-size: 0.9rem; font-weight: 900; }
+.chain-arrow { color: #64748b; font-size: 1.1rem; font-weight: 900; }
 
 .slot-container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 18px;
+  gap: 12px;
+  margin-bottom: 22px;
 }
 .combo-slot {
-  background: rgba(15, 23, 42, 0.7);
-  border: 2px dashed #475569;
+  background: rgba(15, 23, 42, 0.75);
+  border: 2.5px dashed #475569;
   border-radius: var(--radius-sm);
-  padding: 10px 14px;
+  padding: 14px 18px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-height: 52px;
+  gap: 16px;
+  min-height: 64px;
   transition: all 0.25s;
 }
-.combo-slot.filled { border-style: solid; border-color: #a78bfa; background: rgba(124, 58, 237, 0.15); }
-.combo-slot.correct { border-color: #34d399; background: rgba(5, 150, 105, 0.2); animation: popScale 0.35s ease; }
+.combo-slot.filled { border-style: solid; border-color: #a78bfa; background: rgba(124, 58, 237, 0.18); }
+.combo-slot.correct { border-color: #34d399; background: rgba(5, 150, 105, 0.25); animation: popScale 0.35s ease; }
 .slot-badge {
-  width: 30px; height: 30px;
-  border-radius: 8px;
+  width: 38px; height: 38px;
+  border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 900; font-size: 0.85rem;
+  font-weight: 900; font-size: 1.05rem;
   color: #fff; flex-shrink: 0;
 }
 .slot-badge.d { background: #2563eb; }
 .slot-badge.e { background: #ea580c; }
 .slot-badge.s { background: #dc2626; }
 .slot-badge.c { background: #059669; }
-.slot-text { font-size: 0.92rem; font-weight: 700; color: var(--text-main); flex: 1; text-align: left; }
+.slot-text { font-size: 1.15rem; font-weight: 700; color: var(--text-main); flex: 1; text-align: left; line-height: 1.45; }
 
 .puzzle-cards-pool {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 .pcard {
   background: rgba(30, 41, 59, 0.95);
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.18);
   border-radius: var(--radius-sm);
-  padding: 12px 14px;
-  font-size: 0.92rem;
+  padding: 16px 18px;
+  font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
   text-align: left;
+  line-height: 1.5;
   transition: all 0.18s;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
-.pcard:hover { border-color: var(--secondary); transform: translateY(-2px); }
-.pcard.selected { border-color: var(--accent-yellow); background: rgba(250, 204, 21, 0.15); box-shadow: 0 0 12px var(--accent-yellow); }
+.pcard:hover { border-color: var(--secondary); transform: translateY(-3px); }
+.pcard.selected { border-color: var(--accent-yellow); background: rgba(250, 204, 21, 0.15); box-shadow: 0 0 16px var(--accent-yellow); }
 .pcard.used { opacity: 0.25; pointer-events: none; }
 
 /* ===== STAGE 4: BOSS BATTLE ===== */
 .boss-card {
   background: linear-gradient(145deg, #1e1b4b, #311042);
-  border: 2.5px solid #ec4899;
+  border: 3px solid #ec4899;
   border-radius: var(--radius);
-  padding: 18px;
+  padding: 24px;
   text-align: center;
-  margin-bottom: 18px;
-  box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+  margin-bottom: 22px;
+  box-shadow: 0 0 35px rgba(236, 72, 153, 0.35);
   position: relative;
 }
-.boss-avatar { font-size: 3.5rem; margin-bottom: 6px; animation: bossFloat 2s ease-in-out infinite; }
-@keyframes bossFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-.boss-name { font-weight: 900; font-size: 1.1rem; color: #f472b6; margin-bottom: 8px; }
+.boss-avatar { font-size: 4.2rem; margin-bottom: 8px; animation: bossFloat 2s ease-in-out infinite; }
+@keyframes bossFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.boss-name { font-weight: 900; font-size: 1.35rem; color: #f472b6; margin-bottom: 12px; }
 .boss-hp-wrap {
-  width: 80%;
-  height: 12px;
+  width: 75%;
+  height: 16px;
   background: #334155;
   border-radius: 99px;
-  margin: 0 auto 12px;
+  margin: 0 auto 16px;
   overflow: hidden;
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.25);
 }
 .boss-hp-fill { height: 100%; width: 100%; background: linear-gradient(90deg, #ef4444, #f43f5e); transition: width 0.4s ease; }
 .boss-dialog {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 12px;
-  padding: 12px 16px;
-  font-size: 0.95rem;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 14px;
+  padding: 16px 20px;
+  font-size: 1.25rem;
   font-weight: 700;
+  line-height: 1.6;
   color: #fff;
-  border-left: 4px solid #ec4899;
+  border-left: 5px solid #ec4899;
   text-align: left;
 }
 
 .attack-builder {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 .keyword-blocks {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 10px;
+  margin-top: 10px;
 }
 .kw-block {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.25);
   border-radius: 99px;
-  padding: 6px 14px;
-  font-size: 0.85rem;
+  padding: 10px 20px;
+  font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.15s;
 }
-.kw-block:hover { background: var(--primary); border-color: var(--primary-light); }
-.kw-block.used { opacity: 0.3; pointer-events: none; }
+.kw-block:hover { background: var(--primary); border-color: var(--primary-light); transform: scale(1.05); }
+.kw-block.used { opacity: 0.25; pointer-events: none; }
 
 /* ===== SCREEN: FINAL ===== */
 .license-card {
   background: linear-gradient(135deg, #1e293b, #0f172a);
-  border: 3px solid var(--accent-yellow);
+  border: 3.5px solid var(--accent-yellow);
   border-radius: var(--radius);
-  padding: 24px 20px;
+  padding: 36px 28px;
   text-align: center;
-  box-shadow: 0 0 35px rgba(250, 204, 21, 0.3);
-  margin-bottom: 24px;
+  box-shadow: 0 0 45px rgba(250, 204, 21, 0.35);
+  margin-bottom: 30px;
   position: relative;
 }
 .license-badge {
-  width: 70px; height: 70px;
+  width: 85px; height: 85px;
   border-radius: 50%;
   background: linear-gradient(135deg, #facc15, #f59e0b);
   color: #1e1b4b;
   display: flex; align-items: center; justify-content: center;
-  font-size: 2.2rem;
-  margin: 0 auto 12px;
-  box-shadow: 0 0 20px rgba(250, 204, 21, 0.6);
+  font-size: 2.8rem;
+  margin: 0 auto 16px;
+  box-shadow: 0 0 25px rgba(250, 204, 21, 0.7);
 }
-.license-title { font-family: 'Black Han Sans', sans-serif; font-size: 1.6rem; color: var(--accent-yellow); margin-bottom: 4px; }
+.license-title { font-family: 'Black Han Sans', sans-serif; font-size: 2.2rem; color: var(--accent-yellow); margin-bottom: 6px; }
 .license-name-inp {
-  background: rgba(255, 255, 255, 0.08);
-  border: 2px solid var(--primary-light);
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2.5px solid var(--primary-light);
+  border-radius: 10px;
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1.35rem;
   font-weight: 800;
   text-align: center;
-  padding: 8px 16px;
-  margin: 12px 0;
-  width: 80%;
+  padding: 10px 20px;
+  margin: 14px 0;
+  width: 70%;
   outline: none;
 }
 .rank-box {
   font-family: 'Black Han Sans', sans-serif;
-  font-size: 3.5rem;
+  font-size: 4.8rem;
   color: #facc15;
-  text-shadow: 0 0 20px rgba(250, 204, 21, 0.8);
+  text-shadow: 0 0 25px rgba(250, 204, 21, 0.85);
   line-height: 1;
-  margin: 10px 0;
+  margin: 16px 0;
 }
 
 /* ===== MODAL & OVERLAY ===== */
 .modal-overlay {
   position: fixed; inset: 0; z-index: 2000;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
-  display: none; align-items: center; justify-content: center; padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: none; align-items: center; justify-content: center; padding: 24px;
 }
 .modal-overlay.visible { display: flex; }
 .modal-box {
   background: linear-gradient(145deg, #1e293b, #0f172a);
-  border: 2px solid var(--primary-light);
+  border: 2.5px solid var(--primary-light);
   border-radius: var(--radius);
-  padding: 30px 24px;
+  padding: 36px 30px;
   text-align: center;
-  max-width: 380px; width: 100%;
-  box-shadow: 0 10px 40px rgba(124, 58, 237, 0.4);
+  max-width: 440px; width: 100%;
+  box-shadow: 0 12px 50px rgba(124, 58, 237, 0.5);
   animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 @keyframes popIn { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
 /* ===== TOAST ===== */
 .toast {
-  position: fixed; bottom: 24px; left: 50%;
-  transform: translateX(-50%) translateY(80px);
+  position: fixed; bottom: 30px; left: 50%;
+  transform: translateX(-50%) translateY(90px);
   background: #1e293b; color: #fff;
-  border: 1.5px solid var(--primary-light);
-  padding: 10px 22px; border-radius: 99px;
-  font-weight: 800; font-size: 0.92rem;
+  border: 2px solid var(--primary-light);
+  padding: 14px 30px; border-radius: 99px;
+  font-weight: 800; font-size: 1.15rem;
   z-index: 3000; opacity: 0;
   transition: transform 0.25s, opacity 0.25s;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
   white-space: nowrap; pointer-events: none;
 }
 .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
@@ -508,8 +513,8 @@ body {
 /* ===== ANIMATIONS ===== */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-8px); }
-  40%, 80% { transform: translateX(8px); }
+  20%, 60% { transform: translateX(-10px); }
+  40%, 80% { transform: translateX(10px); }
 }
 .screen-shake { animation: shake 0.4s ease; }
 @keyframes popScale {
@@ -523,7 +528,7 @@ body {
 <!-- GAME HUD -->
 <div id="game-hud">
   <div class="hud-item">
-    <span style="font-size:0.8rem; color:var(--text-muted);">HP</span>
+    <span style="font-size:0.95rem; color:var(--text-muted);">HP</span>
     <div class="hud-hp" id="hud-hp">
       <span class="heart" id="hp-1">❤️</span>
       <span class="heart" id="hp-2">❤️</span>
@@ -544,17 +549,17 @@ body {
 <!-- STAGE CLEAR / GAME OVER MODAL -->
 <div class="modal-overlay" id="game-modal">
   <div class="modal-box">
-    <div style="font-size:3.5rem; margin-bottom:10px;" id="modal-icon">🏆</div>
-    <h2 style="font-family:'Black Han Sans'; font-size:1.6rem; margin-bottom:8px;" id="modal-title">STAGE CLEAR!</h2>
-    <p style="color:var(--text-muted); font-size:0.95rem; margin-bottom:20px;" id="modal-desc">축하합니다! 완벽하게 방어했습니다.</p>
-    <div style="background:rgba(255,255,255,0.06); border-radius:12px; padding:12px; margin-bottom:20px;">
-      <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-weight:700;">
+    <div style="font-size:4.2rem; margin-bottom:12px;" id="modal-icon">🏆</div>
+    <h2 style="font-family:'Black Han Sans'; font-size:2rem; margin-bottom:10px;" id="modal-title">STAGE CLEAR!</h2>
+    <p style="color:var(--text-muted); font-size:1.15rem; margin-bottom:24px; line-height:1.6;" id="modal-desc">축하합니다! 완벽하게 방어했습니다.</p>
+    <div style="background:rgba(255,255,255,0.08); border-radius:14px; padding:16px 20px; margin-bottom:24px; font-size:1.15rem;">
+      <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-weight:700;">
         <span>획득 점수</span>
-        <span style="color:var(--accent-yellow);" id="modal-score">+500 PTS</span>
+        <span style="color:var(--accent-yellow); font-weight:900;" id="modal-score">+500 PTS</span>
       </div>
       <div style="display:flex; justify-content:space-between; font-weight:700;">
         <span>최고 콤보</span>
-        <span style="color:var(--accent-orange);" id="modal-combo">x3 COMBO</span>
+        <span style="color:var(--accent-orange); font-weight:900;" id="modal-combo">x3 COMBO</span>
       </div>
     </div>
     <button class="btn btn-primary" id="modal-btn" onclick="handleModalAction()">다음 스테이지로 🚀</button>
@@ -611,7 +616,7 @@ body {
       </div>
     </div>
 
-    <button class="btn btn-primary" style="font-size:1.15rem; padding:16px;" onclick="startGame()">
+    <button class="btn btn-primary" style="font-size:1.35rem; padding:20px;" onclick="startGame()">
       퀘스트 시작하기 ⚔️
     </button>
   </div>
@@ -622,7 +627,7 @@ body {
   <div class="game-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
       <div class="stage-badge">STAGE 1 — 스피드 어택</div>
-      <div style="font-weight:900; color:var(--secondary);" id="s1-progress">1 / 5</div>
+      <div style="font-weight:900; font-size:1.2rem; color:var(--secondary);" id="s1-progress">1 / 5</div>
     </div>
     <h2 class="stage-title">⚡️ 거절 유형 판별 레이더</h2>
     <div class="timer-bar-wrap"><div class="timer-bar-fill" id="s1-timer"></div></div>
@@ -643,12 +648,12 @@ body {
   <div class="game-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
       <div class="stage-badge">STAGE 2 — 파츠 헌팅</div>
-      <div style="font-weight:900; color:var(--secondary);" id="s2-progress">1 / 6</div>
+      <div style="font-weight:900; font-size:1.2rem; color:var(--secondary);" id="s2-progress">1 / 6</div>
     </div>
     <h2 class="stage-title">🎯 DESC 파츠 매칭 슈팅</h2>
     <div class="timer-bar-wrap"><div class="timer-bar-fill" id="s2-timer"></div></div>
 
-    <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:8px; text-align:center;">
+    <div style="font-size:1.05rem; font-weight:700; color:var(--text-muted); margin-bottom:12px; text-align:center;">
       아래 문장은 D, E, S, C 중 어느 단계에 해당할까요?
     </div>
     <div class="target-sentence-card" id="s2-target-text">
@@ -685,7 +690,7 @@ body {
   <div class="game-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
       <div class="stage-badge">STAGE 3 — 4-콤보 체인 퍼즐</div>
-      <div style="font-weight:900; color:var(--secondary);" id="s3-progress">1 / 2</div>
+      <div style="font-weight:900; font-size:1.2rem; color:var(--secondary);" id="s3-progress">1 / 2</div>
     </div>
     <h2 class="stage-title">🧩 DESC 논리 체인 조립</h2>
 
@@ -699,9 +704,9 @@ body {
       <div class="chain-dot" id="cdot-3">C</div>
     </div>
 
-    <div class="sit-box" style="margin-bottom:14px; padding:12px 14px;">
+    <div class="sit-box" style="margin-bottom:18px; padding:18px 20px;">
       <div class="sit-author" id="s3-sit-title">📍 위험 시나리오</div>
-      <div style="font-size:0.9rem; color:#cbd5e1; line-height:1.4;" id="s3-sit-desc">...</div>
+      <div style="font-size:1.15rem; color:#cbd5e1; line-height:1.55;" id="s3-sit-desc">...</div>
     </div>
 
     <!-- 4 Slots -->
@@ -724,7 +729,7 @@ body {
       </div>
     </div>
 
-    <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:8px;">
+    <div style="font-size:1.05rem; font-weight:700; color:var(--accent-yellow); margin-bottom:10px;">
       👇 흩어진 문장 조각을 D ➔ E ➔ S ➔ C 순서대로 터치하세요!
     </div>
     <div class="puzzle-cards-pool" id="s3-pool">
@@ -738,7 +743,7 @@ body {
   <div class="game-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
       <div class="stage-badge">STAGE 4 — FINAL BOSS BATTLE</div>
-      <div style="font-weight:900; color:#f472b6;">BOSS FIGHT</div>
+      <div style="font-weight:900; font-size:1.2rem; color:#f472b6;">BOSS FIGHT</div>
     </div>
     <h2 class="stage-title">👑 실전 보스 격파 배틀</h2>
 
@@ -755,13 +760,13 @@ body {
 
     <div class="attack-builder">
       <div style="display:flex; align-items:center; justify-content:space-between;">
-        <span style="font-weight:800; font-size:0.95rem; color:#a78bfa;" id="s4-step-guide">
+        <span style="font-weight:800; font-size:1.2rem; color:#a78bfa;" id="s4-step-guide">
           [1단계] D (상황 묘사) 대사를 완성하세요!
         </span>
       </div>
 
-      <div style="background:rgba(15,23,42,0.8); border:2px solid var(--primary); border-radius:var(--radius-sm); padding:12px;">
-        <div id="s4-constructed-text" style="font-size:0.98rem; font-weight:700; min-height:48px; color:#f8fafc; line-height:1.5;">
+      <div style="background:rgba(15,23,42,0.85); border:2.5px solid var(--primary); border-radius:var(--radius-sm); padding:16px 20px;">
+        <div id="s4-constructed-text" style="font-size:1.25rem; font-weight:700; min-height:56px; color:#f8fafc; line-height:1.6;">
           키워드 블록을 터치하여 문장을 완성하세요...
         </div>
       </div>
@@ -770,7 +775,7 @@ body {
         <!-- Generated in JS -->
       </div>
 
-      <button class="btn btn-primary" style="margin-top:10px;" id="s4-attack-btn" onclick="fireBossAttack()">
+      <button class="btn btn-primary" style="margin-top:14px; font-size:1.3rem; padding:18px;" id="s4-attack-btn" onclick="fireBossAttack()">
         DESC 방어 공격 발사! 💥
       </button>
     </div>
@@ -783,27 +788,27 @@ body {
     <div class="license-card">
       <div class="license-badge">🛡️</div>
       <div class="license-title">거절 마스터 공인 면허증</div>
-      <p style="font-size:0.82rem; color:var(--text-muted);">REFUSAL DEFENDER OFFICIAL LICENSE</p>
+      <p style="font-size:1rem; color:var(--text-muted); margin-bottom:12px;">REFUSAL DEFENDER OFFICIAL LICENSE</p>
       
       <div class="rank-box" id="final-rank">RANK S</div>
       
-      <div style="margin:12px 0;">
-        <label style="font-size:0.85rem; color:var(--text-muted); display:block;">면허 소지자 이름 / 닉네임</label>
+      <div style="margin:16px 0;">
+        <label style="font-size:1.05rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">면허 소지자 이름 / 닉네임</label>
         <input type="text" id="final-user-name" class="license-name-inp" value="멋진 디펜더" maxlength="10">
       </div>
 
-      <div style="background:rgba(255,255,255,0.06); border-radius:12px; padding:14px; text-align:left; font-size:0.85rem; line-height:1.7; margin-bottom:14px;">
-        <div>⭐️ <strong>최종 획득 스코어:</strong> <span style="color:var(--accent-yellow);" id="final-total-score">0 PTS</span></div>
-        <div>🔥 <strong>최고 연속 콤보:</strong> <span style="color:var(--accent-orange);" id="final-max-combo">0 COMBO</span></div>
-        <div>📜 <strong>수여 칭호:</strong> <span style="color:#38bdf8;" id="final-title-text">철벽의 논리 마스터</span></div>
+      <div style="background:rgba(255,255,255,0.08); border-radius:14px; padding:20px 24px; text-align:left; font-size:1.1rem; line-height:1.8; margin-bottom:18px;">
+        <div>⭐️ <strong>최종 획득 스코어:</strong> <span style="color:var(--accent-yellow); font-weight:900;" id="final-total-score">0 PTS</span></div>
+        <div>🔥 <strong>최고 연속 콤보:</strong> <span style="color:var(--accent-orange); font-weight:900;" id="final-max-combo">0 COMBO</span></div>
+        <div>📜 <strong>수여 칭호:</strong> <span style="color:#38bdf8; font-weight:900;" id="final-title-text">철벽의 논리 마스터</span></div>
       </div>
 
-      <p style="font-size:0.82rem; color:var(--accent-green); font-weight:700;">
+      <p style="font-size:1.05rem; color:var(--accent-green); font-weight:800; line-height:1.6;">
         위 사람은 어떠한 부당한 유혹에도 DESC 기법으로 자신을 지킬 수 있음을 인증함.
       </p>
     </div>
 
-    <button class="btn btn-primary" style="padding:16px;" onclick="restartGame()">
+    <button class="btn btn-primary" style="padding:18px; font-size:1.25rem;" onclick="restartGame()">
       다시 도전하여 랭크 올리기 🔄
     </button>
   </div>
@@ -1130,7 +1135,7 @@ function loadS1Question() {
   opts.forEach(opt => {
     const btn = document.createElement('div');
     btn.className = 'type-btn';
-    btn.innerHTML = '<span>' + opt.label + '</span><span style="font-size:0.75rem; color:var(--text-muted);">' + opt.sub + '</span>';
+    btn.innerHTML = '<span>' + opt.label + '</span><span style="font-size:0.95rem; color:var(--text-muted);">' + opt.sub + '</span>';
     btn.onclick = () => handleS1Answer(btn, opt.type, q.type, q.reason);
     optWrap.appendChild(btn);
   });
