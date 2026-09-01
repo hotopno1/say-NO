@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>거절 디펜스 🛡️ — DESC 훈련 아케이드</title>
+<title>논리적 거절방패 🛡️ — DESC 훈련 아케이드</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&family=Black+Han+Sans&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -89,7 +89,7 @@ body {
   opacity: 0;
   transform: translateY(15px);
   transition: opacity 0.3s ease, transform 0.3s ease;
-  max-width: 880px; /* 노트북 화면에 맞게 대폭 확장 */
+  max-width: 880px;
   margin: 0 auto;
   padding: 92px 24px 40px;
 }
@@ -216,7 +216,7 @@ body {
 .quest-sub { font-size: 0.92rem; color: var(--text-muted); margin-top: 2px; }
 .quest-stars { color: var(--accent-yellow); font-size: 1.05rem; letter-spacing: 3px; font-weight: 900; }
 
-/* ===== STAGE 1: RADAR TYPE ATTACK ===== */
+/* ===== STAGE 1: SPEED GAME ===== */
 .sit-box {
   background: rgba(15, 23, 42, 0.85);
   border: 2.5px solid #3b82f6;
@@ -250,7 +250,7 @@ body {
 .type-btn.correct { background: #065f46 !important; border-color: #34d399 !important; color: #a7f3d0 !important; }
 .type-btn.wrong { background: #991b1b !important; border-color: #f87171 !important; color: #fecaca !important; animation: shake 0.4s; }
 
-/* ===== STAGE 2: DESC PARTS HUNTING ===== */
+/* ===== STAGE 2: LOGICAL REFUSAL MATCHING ===== */
 .target-sentence-card {
   background: linear-gradient(145deg, #1e293b, #0f172a);
   border: 3px solid var(--secondary);
@@ -295,7 +295,7 @@ body {
 .part-label { font-size: 1.1rem; font-weight: 800; color: var(--text-main); }
 .part-desc { font-size: 0.85rem; color: var(--text-muted); }
 
-/* ===== STAGE 3: 4-CHAIN COMBO PUZZLE ===== */
+/* ===== STAGE 3: ORDER PUZZLE ===== */
 .chain-indicator {
   display: flex;
   justify-content: center;
@@ -562,15 +562,15 @@ body {
         <span style="color:var(--accent-orange); font-weight:900;" id="modal-combo">x3 COMBO</span>
       </div>
     </div>
-    <button class="btn btn-primary" id="modal-btn" onclick="handleModalAction()">다음 스테이지로 🚀</button>
+    <button class="btn btn-primary" id="modal-btn" onclick="handleModalAction()">다음 단계로 🚀</button>
   </div>
 </div>
 
 <!-- ================= SCREEN: START ================= -->
 <div class="screen active" id="s-start">
   <div style="text-align:center; padding: 20px 0;">
-    <div class="stage-badge">🎮 DRUG PREVENTION ACTION QUEST</div>
-    <h1 class="hero-title">거절 디펜스</h1>
+    <div class="stage-badge">🛡️ DESC REFUSAL DEFENSE QUEST</div>
+    <h1 class="hero-title">논리적 거절방패</h1>
     <p class="hero-desc">유혹의 순간, 논리적 거절(DESC)로 나를 지켜라!<br>4대 관문을 돌파하고 <strong>거절 마스터 면허</strong>를 획득하세요.</p>
     
     <div class="quest-road-map">
@@ -578,7 +578,7 @@ body {
         <div class="quest-node-left">
           <div class="quest-icon">⚡️</div>
           <div>
-            <div class="quest-name">1단계: 유형 판별 스피드 어택</div>
+            <div class="quest-name">1단계: 스피드 게임</div>
             <div class="quest-sub">회피형·분노형·논리형 반사 식별</div>
           </div>
         </div>
@@ -588,7 +588,7 @@ body {
         <div class="quest-node-left">
           <div class="quest-icon">🎯</div>
           <div>
-            <div class="quest-name">2단계: DESC 파츠 헌팅</div>
+            <div class="quest-name">2단계: 논리적 거절 매칭</div>
             <div class="quest-sub">상황·감정·제안·결과 고속 매칭</div>
           </div>
         </div>
@@ -598,7 +598,7 @@ body {
         <div class="quest-node-left">
           <div class="quest-icon">🧩</div>
           <div>
-            <div class="quest-name">3단계: 4-콤보 체인 조립 퍼즐</div>
+            <div class="quest-name">3단계: 순서 조립 퍼즐</div>
             <div class="quest-sub">실전 유혹 시나리오 완벽 순서 방어</div>
           </div>
         </div>
@@ -608,7 +608,7 @@ body {
         <div class="quest-node-left">
           <div class="quest-icon">👑</div>
           <div>
-            <div class="quest-name">4단계: 실전 보스 배틀</div>
+            <div class="quest-name">4단계: 실전 배틀</div>
             <div class="quest-sub">유혹의 보스를 향한 결정적 DESC 반격</div>
           </div>
         </div>
@@ -617,7 +617,7 @@ body {
     </div>
 
     <button class="btn btn-primary" style="font-size:1.35rem; padding:20px;" onclick="startGame()">
-      퀘스트 시작하기 ⚔️
+      훈련 시작하기 ⚔️
     </button>
   </div>
 </div>
@@ -626,10 +626,10 @@ body {
 <div class="screen" id="s-1">
   <div class="game-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
-      <div class="stage-badge">STAGE 1 — 스피드 어택</div>
+      <div class="stage-badge">1단계 — 스피드 게임</div>
       <div style="font-weight:900; font-size:1.2rem; color:var(--secondary);" id="s1-progress">1 / 5</div>
     </div>
-    <h2 class="stage-title">⚡️ 거절 유형 판별 레이더</h2>
+    <h2 class="stage-title">⚡️ 1단계: 스피드 게임</h2>
     <div class="timer-bar-wrap"><div class="timer-bar-fill" id="s1-timer"></div></div>
 
     <div class="sit-box">
@@ -647,10 +647,10 @@ body {
 <div class="screen" id="s-2">
   <div class="game-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
-      <div class="stage-badge">STAGE 2 — 파츠 헌팅</div>
+      <div class="stage-badge">2단계 — 논리적 거절 매칭</div>
       <div style="font-weight:900; font-size:1.2rem; color:var(--secondary);" id="s2-progress">1 / 6</div>
     </div>
-    <h2 class="stage-title">🎯 DESC 파츠 매칭 슈팅</h2>
+    <h2 class="stage-title">🎯 2단계: 논리적 거절 매칭</h2>
     <div class="timer-bar-wrap"><div class="timer-bar-fill" id="s2-timer"></div></div>
 
     <div style="font-size:1.05rem; font-weight:700; color:var(--text-muted); margin-bottom:12px; text-align:center;">
@@ -689,10 +689,10 @@ body {
 <div class="screen" id="s-3">
   <div class="game-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
-      <div class="stage-badge">STAGE 3 — 4-콤보 체인 퍼즐</div>
+      <div class="stage-badge">3단계 — 순서 조립 퍼즐</div>
       <div style="font-weight:900; font-size:1.2rem; color:var(--secondary);" id="s3-progress">1 / 2</div>
     </div>
-    <h2 class="stage-title">🧩 DESC 논리 체인 조립</h2>
+    <h2 class="stage-title">🧩 3단계: 순서 조립 퍼즐</h2>
 
     <div class="chain-indicator">
       <div class="chain-dot" id="cdot-0">D</div>
@@ -742,10 +742,10 @@ body {
 <div class="screen" id="s-4">
   <div class="game-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
-      <div class="stage-badge">STAGE 4 — FINAL BOSS BATTLE</div>
+      <div class="stage-badge">4단계 — 실전 배틀</div>
       <div style="font-weight:900; font-size:1.2rem; color:#f472b6;">BOSS FIGHT</div>
     </div>
-    <h2 class="stage-title">👑 실전 보스 격파 배틀</h2>
+    <h2 class="stage-title">👑 4단계: 실전 배틀</h2>
 
     <div class="boss-card">
       <div class="boss-avatar" id="boss-avatar">😈</div>
@@ -1106,7 +1106,7 @@ function handleModalAction() {
   if (window.modalCallback) window.modalCallback();
 }
 
-/* ================= STAGE 1: RADAR TYPE ATTACK ================= */
+/* ================= STAGE 1: SPEED GAME ================= */
 function startStage1() {
   G.currentStage = 1;
   G.s1Idx = 0;
@@ -1116,7 +1116,7 @@ function startStage1() {
 
 function loadS1Question() {
   if (G.s1Idx >= DATA_S1.length) {
-    showModal('1단계 돌파!', '거절 유형을 신속하게 파악했습니다!', '⚡️', '2단계 도전하기 🎯', () => startStage2());
+    showModal('1단계 완료!', '스피드 게임을 훌륭하게 통과했습니다!', '⚡️', '2단계: 논리적 거절 매칭 🎯', () => startStage2());
     return;
   }
   const q = DATA_S1[G.s1Idx];
@@ -1176,7 +1176,7 @@ function handleS1Answer(btn, chosen, correct, reason) {
   }
 }
 
-/* ================= STAGE 2: DESC PARTS HUNTING ================= */
+/* ================= STAGE 2: LOGICAL REFUSAL MATCHING ================= */
 function startStage2() {
   G.currentStage = 2;
   G.s2Idx = 0;
@@ -1186,7 +1186,7 @@ function startStage2() {
 
 function loadS2Question() {
   if (G.s2Idx >= DATA_S2.length) {
-    showModal('2단계 돌파!', 'DESC 핵심 요소를 완벽하게 사냥했습니다!', '🎯', '3단계 도전하기 🧩', () => startStage3());
+    showModal('2단계 완료!', '논리적 거절 파츠를 완벽하게 매칭했습니다!', '🎯', '3단계: 순서 조립 퍼즐 🧩', () => startStage3());
     return;
   }
   const item = DATA_S2[G.s2Idx];
@@ -1225,7 +1225,7 @@ function handleS2Answer(chosen) {
   setTimeout(loadS2Question, 800);
 }
 
-/* ================= STAGE 3: 4-CHAIN COMBO PUZZLE ================= */
+/* ================= STAGE 3: ORDER PUZZLE ================= */
 function startStage3() {
   G.currentStage = 3;
   G.s3Round = 0;
@@ -1235,7 +1235,7 @@ function startStage3() {
 
 function loadS3Round() {
   if (G.s3Round >= DATA_S3.length) {
-    showModal('3단계 돌파!', '4-콤보 DESC 논리 방패를 완성했습니다!', '🛡️', '최종 보스 배틀로 👑', () => startStage4());
+    showModal('3단계 완료!', '순서 조립 퍼즐을 완벽하게 해결했습니다!', '🛡️', '4단계: 실전 배틀로 👑', () => startStage4());
     return;
   }
   const data = DATA_S3[G.s3Round];
@@ -1320,7 +1320,7 @@ function loadS4Step() {
     G.s4BossHp = 0;
     bossHpBar.style.width = '0%';
     sfx.play('hit');
-    showModal('보스 완전 격파 (K.O.)!', '유혹의 보스를 DESC 논리로 완벽하게 굴복시켰습니다!', '👑', '면허증 발급받기 📜', () => showFinalScreen());
+    showModal('보스 완전 격파 (K.O.)!', '실전 배틀에서 보스를 DESC 논리로 굴복시켰습니다!', '👑', '면허증 발급받기 📜', () => showFinalScreen());
     return;
   }
 
