@@ -234,6 +234,7 @@ body {
 }
 .sit-author { font-size: 1rem; font-weight: 800; color: #38bdf8; margin-bottom: 10px; }
 .sit-text { font-size: 1.35rem; font-weight: 700; line-height: 1.6; color: #f8fafc; }
+
 .type-btn-grid {
   display: flex;
   flex-direction: column;
@@ -247,15 +248,24 @@ body {
   color: #fff;
   font-weight: 800;
   font-size: 1.2rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: 220px 1fr 260px;
   align-items: center;
-  justify-content: space-between;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 .type-btn:hover { background: rgba(51, 65, 85, 0.95); border-color: var(--primary-light); transform: translateX(6px); }
 .type-btn.correct { background: #065f46 !important; border-color: #34d399 !important; color: #a7f3d0 !important; }
 .type-btn.wrong { background: #991b1b !important; border-color: #f87171 !important; color: #fecaca !important; animation: shake 0.4s; }
+.type-btn-sub { font-size: 0.95rem; color: var(--text-muted); text-align: right; }
+
+@media (max-width: 768px) {
+  .type-btn {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .type-btn-sub { text-align: left; }
+}
 
 /* ===== STAGE 2: MATCHING ===== */
 .target-sentence-card {
@@ -558,7 +568,7 @@ body {
 <div class="toast" id="toast"></div>
 <canvas class="confetti-canvas" id="confetti-canvas"></canvas>
 
-<!-- STAGE CLEAR / MODAL (NEXT & PREV BUTTONS ADDED) -->
+<!-- STAGE CLEAR / MODAL -->
 <div class="modal-overlay" id="game-modal">
   <div class="modal-box">
     <div style="font-size:4.2rem; margin-bottom:12px;" id="modal-icon">🏆</div>
@@ -682,7 +692,7 @@ body {
   </div>
 </div>
 
-<!-- ================= SCREEN: STAGE 3 (NEW: KEYWORD BUILDER) ================= -->
+<!-- ================= SCREEN: STAGE 3 ================= -->
 <div class="screen" id="s-3">
   <div class="game-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -713,7 +723,7 @@ body {
   </div>
 </div>
 
-<!-- ================= SCREEN: STAGE 4 (NEW: BOSS BATTLE PUZZLE) ================= -->
+<!-- ================= SCREEN: STAGE 4 ================= -->
 <div class="screen" id="s-4">
   <div class="game-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -873,15 +883,44 @@ const DATA_S2 = [
   { text: "“서로 존중해야 우리가 신뢰할 수 있는 친구로 남을 수 있어.”", type: "C", desc: "결과제시" }
 ];
 
-// STAGE 3 (기존 4단계: 키워드 조합)
+/* ===== STAGE 3: 복수 정답을 인정하도록 ansList로 수정 ===== */
 const DATA_S3 = [
-  { guide: "[1단계] 상황설명 대사를 완성하세요!", blocks: ["네가 지금", "출처 불분명한", "다이어트약을", "나에게", "건네며 권유하고 있어."], ans: "네가 지금 출처 불분명한 다이어트약을 나에게 건네며 권유하고 있어." },
-  { guide: "[2단계] 감정/가치 대사를 완성하세요!", blocks: ["나는 검증 안 된 약으로", "내 건강과 정신을", "망치고 싶지 않아서", "매우 불안해."], ans: "나는 검증 안 된 약으로 내 건강과 정신을 망치고 싶지 않아서 매우 불안해." },
-  { guide: "[3단계] 단호한 거절 대사를 선언하세요!", blocks: ["의사 처방 없는 약은", "절대 먹지 않을 테니", "다시는 이런 제안", "하지 말아줘."], ans: "의사 처방 없는 약은 절대 먹지 않을 테니 다시는 이런 제안 하지 말아줘." },
-  { guide: "[4단계] 결과제시 대사를 선택하세요!", blocks: ["우리가 서로의 가치관을", "존중해야만", "진짜 좋은 친구로", "남을 수 있어."], ans: "우리가 서로의 가치관을 존중해야만 진짜 좋은 친구로 남을 수 있어." }
+  { 
+    guide: "[1단계] 상황설명 대사를 완성하세요!", 
+    blocks: ["나에게", "다이어트약을", "건네며 권유하고 있어.", "네가 지금", "출처 불분명한"], 
+    ansList: [
+      "네가 지금 나에게 출처 불분명한 다이어트약을 건네며 권유하고 있어.",
+      "네가 지금 출처 불분명한 다이어트약을 나에게 건네며 권유하고 있어.",
+      "출처 불분명한 다이어트약을 네가 지금 나에게 건네며 권유하고 있어.",
+      "나에게 네가 지금 출처 불분명한 다이어트약을 건네며 권유하고 있어."
+    ]
+  },
+  { 
+    guide: "[2단계] 감정/가치 대사를 완성하세요!", 
+    blocks: ["나는 매우 불안해.", "망치고 싶지 않아서", "검증 안 된 약으로", "내 건강과 정신을"], 
+    ansList: [
+      "나는 검증 안 된 약으로 내 건강과 정신을 망치고 싶지 않아서 매우 불안해.",
+      "검증 안 된 약으로 내 건강과 정신을 망치고 싶지 않아서 나는 매우 불안해."
+    ]
+  },
+  { 
+    guide: "[3단계] 단호한 거절 대사를 선언하세요!", 
+    blocks: ["하지 말아줘.", "의사 처방 없는 약은", "절대 먹지 않을 테니", "다시는 이런 제안"], 
+    ansList: [
+      "의사 처방 없는 약은 절대 먹지 않을 테니 다시는 이런 제안 하지 말아줘.",
+      "다시는 이런 제안 하지 말아줘. 의사 처방 없는 약은 절대 먹지 않을 테니"
+    ]
+  },
+  { 
+    guide: "[4단계] 결과제시 대사를 선택하세요!", 
+    blocks: ["남을 수 있어.", "진짜 좋은 친구로", "우리가 서로의 가치관을", "존중해야만"], 
+    ansList: [
+      "우리가 서로의 가치관을 존중해야만 진짜 좋은 친구로 남을 수 있어.",
+      "진짜 좋은 친구로 남을 수 있어. 우리가 서로의 가치관을 존중해야만"
+    ]
+  }
 ];
 
-// STAGE 4 (기존 3단계: 보스전 문장 퍼즐)
 const DATA_S4 = [
   {
     title: "📍 최종 보스 1차전: 불법 식욕억제제 유혹",
@@ -990,9 +1029,9 @@ function loadS1Question() {
   document.getElementById('s1-question').textContent = q.reply;
 
   const opts = [
-    { label: "😓 회피형 거절", type: "회피", sub: "애매하게 거절 → 유혹 반복" },
-    { label: "😡 분노형 거절", type: "분노", sub: "감정적 폭발 → 주도권 상실" },
-    { label: "😎 논리형 거절", type: "논리", sub: "논리적 방법 → 관계&주도권 유지" }
+    { label: "😓 회피형 거절", type: "회피", sub: "애매하게 거절 ➔ 유혹 반복" },
+    { label: "😡 분노형 거절", type: "분노", sub: "감정적 폭발 ➔ 주도권 상실" },
+    { label: "😎 논리형 거절", type: "논리", sub: "논리적 방법 ➔ 관계&주도권 유지" }
   ];
 
   const optWrap = document.getElementById('s1-options');
@@ -1000,7 +1039,7 @@ function loadS1Question() {
   opts.forEach(opt => {
     const btn = document.createElement('div');
     btn.className = 'type-btn';
-    btn.innerHTML = '<span>' + opt.label + '</span><span style="font-size:0.95rem; color:var(--text-muted);">' + opt.sub + '</span>';
+    btn.innerHTML = '<span>' + opt.label + '</span><div></div><span class="type-btn-sub">' + opt.sub + '</span>';
     btn.onclick = () => handleS1Answer(btn, opt.type, q.type, q.reason);
     optWrap.appendChild(btn);
   });
@@ -1061,7 +1100,7 @@ function handleS2Answer(chosen) {
   G.s2Idx++; setTimeout(loadS2Question, 800);
 }
 
-/* ================= STAGE 3 (NEW: KEYWORD BUILDER) ================= */
+/* ================= STAGE 3 ================= */
 function startStage3() { G.currentStage = 3; G.s3Step = 0; gotoScreen('s-3'); loadS3Step(); }
 function loadS3Step() {
   if (G.s3Step >= DATA_S3.length) {
@@ -1094,9 +1133,10 @@ function loadS3Step() {
 function checkS3Answer() {
   if (G.s3Tokens.length === 0) { toast('먼저 키워드 블록을 조합하세요!'); return; }
   const currentSentence = G.s3Tokens.join(' ');
-  const target = DATA_S3[G.s3Step].ans;
+  const validAnswers = DATA_S3[G.s3Step].ansList;
 
-  if (currentSentence === target) {
+  // 복수 정답 목록 중 하나라도 일치하는지 판별
+  if (validAnswers.includes(currentSentence)) {
     sfx.play('hit'); addScore(200); toast('💥 완벽한 문장 조합 성공!');
     G.s3Step++; setTimeout(loadS3Step, 800);
   } else {
@@ -1106,7 +1146,7 @@ function checkS3Answer() {
   }
 }
 
-/* ================= STAGE 4 (NEW: BOSS BATTLE PUZZLE) ================= */
+/* ================= STAGE 4 ================= */
 function startStage4() { G.currentStage = 4; G.s4Round = 0; G.s4BossHp = 100; gotoScreen('s-4'); loadS4Round(); }
 function loadS4Round() {
   const bossHpBar = document.getElementById('boss-hp-bar');
