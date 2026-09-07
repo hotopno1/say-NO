@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>논리적 거절방패 🛡️ — DESC 훈련 아케이드</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<title>논리적 거절방패 🛡️ — 거절 훈련 아케이드</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --primary: #7c3aed;
@@ -35,6 +35,7 @@ body {
   min-height: 100vh;
   padding-bottom: 50px;
   font-size: 17px;
+  letter-spacing: -0.3px;
 }
 
 /* ===== GAME HUD (TOP BAR) ===== */
@@ -55,7 +56,7 @@ body {
 .hud-hp { display: flex; gap: 6px; font-size: 1.45rem; }
 .hud-hp .heart { transition: transform 0.3s, filter 0.3s; }
 .hud-hp .heart.lost { filter: grayscale(1) opacity(0.25); transform: scale(0.75); }
-.hud-score-val { color: var(--accent-yellow); font-family: 'Black Han Sans', sans-serif; font-size: 1.45rem; letter-spacing: 1px; }
+.hud-score-val { color: var(--accent-yellow); font-weight: 900; font-size: 1.45rem; letter-spacing: 0.5px; }
 .hud-combo-badge {
   background: linear-gradient(135deg, #f97316, #ef4444);
   color: #fff;
@@ -83,7 +84,7 @@ body {
 }
 .hud-btn:hover { background: rgba(255, 255, 255, 0.25); transform: scale(1.08); }
 
-/* ===== SCREEN WRAPPER (LAPTOP OPTIMIZED) ===== */
+/* ===== SCREEN WRAPPER ===== */
 .screen {
   display: none;
   opacity: 0;
@@ -123,9 +124,9 @@ body {
   margin-bottom: 16px;
 }
 .stage-title {
-  font-family: 'Black Han Sans', sans-serif;
+  font-weight: 900;
   font-size: clamp(1.8rem, 4vw, 2.5rem);
-  letter-spacing: 0.5px;
+  letter-spacing: -0.5px;
   margin-bottom: 18px;
   line-height: 1.3;
 }
@@ -154,7 +155,7 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 800;
   font-size: 1.2rem;
-  padding: 16px 36px;
+  padding: 18px 36px;
   border-radius: var(--radius-sm);
   border: none;
   cursor: pointer;
@@ -171,26 +172,33 @@ body {
   box-shadow: 0 6px 24px rgba(124, 58, 237, 0.55);
 }
 .btn-primary:hover { box-shadow: 0 8px 30px rgba(124, 58, 237, 0.75); }
-.btn-success { background: linear-gradient(135deg, #059669, #10b981); color: #fff; }
-.btn-outline { background: transparent; border: 2px solid rgba(255, 255, 255, 0.25); color: #fff; }
-.btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.2); }
 
 /* ===== SCREEN: START ===== */
 .hero-title {
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: clamp(3rem, 7vw, 4.6rem);
-  line-height: 1.15;
-  margin-bottom: 16px;
-  background: linear-gradient(135deg, #a78bfa 0%, #38bdf8 50%, #facc15 100%);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  line-height: 1.2;
+  letter-spacing: -1px;
+  margin-bottom: 18px;
+  background: linear-gradient(135deg, #c4b5fd 0%, #38bdf8 60%, #67e8f9 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 6px 16px rgba(124, 58, 237, 0.45));
+  filter: drop-shadow(0 4px 14px rgba(124, 58, 237, 0.4));
 }
 .hero-desc {
-  color: var(--text-muted);
-  font-size: 1.25rem;
-  line-height: 1.7;
-  margin-bottom: 30px;
+  color: #f1f5f9;
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 .quest-road-map {
   display: flex;
@@ -200,21 +208,20 @@ body {
   text-align: left;
 }
 .quest-node {
-  background: rgba(30, 41, 59, 0.8);
-  border: 2px solid rgba(255, 255, 255, 0.12);
+  background: rgba(30, 41, 59, 0.85);
+  border: 2px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-sm);
-  padding: 16px 22px;
+  padding: 20px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: transform 0.2s, border-color 0.2s;
+  transition: transform 0.2s, border-color 0.2s, background 0.2s;
 }
-.quest-node:hover { transform: translateX(6px); border-color: var(--primary-light); }
-.quest-node-left { display: flex; align-items: center; gap: 16px; }
-.quest-icon { font-size: 2rem; }
-.quest-name { font-weight: 800; font-size: 1.15rem; }
-.quest-sub { font-size: 0.92rem; color: var(--text-muted); margin-top: 2px; }
-.quest-stars { color: var(--accent-yellow); font-size: 1.05rem; letter-spacing: 3px; font-weight: 900; }
+.quest-node:hover { transform: translateX(6px); border-color: var(--primary-light); background: rgba(51, 65, 85, 0.9); }
+.quest-node-left { display: flex; align-items: center; gap: 18px; }
+.quest-icon { font-size: 2.2rem; }
+.quest-name { font-weight: 900; font-size: 1.4rem; color: #fff; letter-spacing: -0.3px; }
+.quest-stars { color: var(--accent-yellow); font-size: 1.2rem; letter-spacing: 4px; font-weight: 900; }
 
 /* ===== STAGE 1: SPEED GAME ===== */
 .sit-box {
@@ -250,7 +257,7 @@ body {
 .type-btn.correct { background: #065f46 !important; border-color: #34d399 !important; color: #a7f3d0 !important; }
 .type-btn.wrong { background: #991b1b !important; border-color: #f87171 !important; color: #fecaca !important; animation: shake 0.4s; }
 
-/* ===== STAGE 2: LOGICAL REFUSAL MATCHING ===== */
+/* ===== STAGE 2: MATCHING ===== */
 .target-sentence-card {
   background: linear-gradient(145deg, #1e293b, #0f172a);
   border: 3px solid var(--secondary);
@@ -275,11 +282,12 @@ body {
 .desc-part-btn {
   background: rgba(30, 41, 59, 0.95);
   border-radius: var(--radius);
-  padding: 22px 16px;
+  padding: 26px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 10px;
   cursor: pointer;
   transition: all 0.18s;
   border: 3px solid transparent;
@@ -291,11 +299,70 @@ body {
 .desc-part-btn.btn-e { border-color: #f97316; background: rgba(249, 115, 22, 0.12); }
 .desc-part-btn.btn-s { border-color: #ef4444; background: rgba(239, 68, 68, 0.12); }
 .desc-part-btn.btn-c { border-color: #10b981; background: rgba(16, 185, 129, 0.12); }
-.part-letter { font-family: 'Black Han Sans', sans-serif; font-size: 2.4rem; line-height: 1; }
-.part-label { font-size: 1.1rem; font-weight: 800; color: var(--text-main); }
-.part-desc { font-size: 0.85rem; color: var(--text-muted); }
+.part-label-main { font-size: 1.6rem; font-weight: 900; line-height: 1.2; text-align: center; }
+.part-desc { font-size: 0.95rem; color: var(--text-muted); font-weight: 600; text-align: center; }
 
-/* ===== STAGE 3: ORDER PUZZLE ===== */
+/* ===== STAGE 3: KEYWORD BUILDER ===== */
+.attack-builder {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.keyword-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+.kw-block {
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 99px;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.kw-block:hover { background: var(--primary); border-color: var(--primary-light); transform: scale(1.05); }
+.kw-block.used { opacity: 0.25; pointer-events: none; }
+
+/* ===== STAGE 4: PUZZLE & BOSS BATTLE ===== */
+.boss-card {
+  background: linear-gradient(145deg, #1e1b4b, #311042);
+  border: 3px solid #ec4899;
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 22px;
+  box-shadow: 0 0 35px rgba(236, 72, 153, 0.35);
+  position: relative;
+}
+.boss-avatar { font-size: 4.2rem; margin-bottom: 8px; animation: bossFloat 2s ease-in-out infinite; }
+@keyframes bossFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.boss-name { font-weight: 900; font-size: 1.35rem; color: #f472b6; margin-bottom: 12px; }
+.boss-hp-wrap {
+  width: 75%;
+  height: 16px;
+  background: #334155;
+  border-radius: 99px;
+  margin: 0 auto 16px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+}
+.boss-hp-fill { height: 100%; width: 100%; background: linear-gradient(90deg, #ef4444, #f43f5e); transition: width 0.4s ease; }
+.boss-dialog {
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 14px;
+  padding: 16px 20px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: #fff;
+  border-left: 5px solid #ec4899;
+  text-align: left;
+}
+
 .chain-indicator {
   display: flex;
   justify-content: center;
@@ -368,68 +435,7 @@ body {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 .pcard:hover { border-color: var(--secondary); transform: translateY(-3px); }
-.pcard.selected { border-color: var(--accent-yellow); background: rgba(250, 204, 21, 0.15); box-shadow: 0 0 16px var(--accent-yellow); }
 .pcard.used { opacity: 0.25; pointer-events: none; }
-
-/* ===== STAGE 4: BOSS BATTLE ===== */
-.boss-card {
-  background: linear-gradient(145deg, #1e1b4b, #311042);
-  border: 3px solid #ec4899;
-  border-radius: var(--radius);
-  padding: 24px;
-  text-align: center;
-  margin-bottom: 22px;
-  box-shadow: 0 0 35px rgba(236, 72, 153, 0.35);
-  position: relative;
-}
-.boss-avatar { font-size: 4.2rem; margin-bottom: 8px; animation: bossFloat 2s ease-in-out infinite; }
-@keyframes bossFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-.boss-name { font-weight: 900; font-size: 1.35rem; color: #f472b6; margin-bottom: 12px; }
-.boss-hp-wrap {
-  width: 75%;
-  height: 16px;
-  background: #334155;
-  border-radius: 99px;
-  margin: 0 auto 16px;
-  overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.25);
-}
-.boss-hp-fill { height: 100%; width: 100%; background: linear-gradient(90deg, #ef4444, #f43f5e); transition: width 0.4s ease; }
-.boss-dialog {
-  background: rgba(0, 0, 0, 0.55);
-  border-radius: 14px;
-  padding: 16px 20px;
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.6;
-  color: #fff;
-  border-left: 5px solid #ec4899;
-  text-align: left;
-}
-
-.attack-builder {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.keyword-blocks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-.kw-block {
-  background: rgba(255, 255, 255, 0.12);
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  border-radius: 99px;
-  padding: 10px 20px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.kw-block:hover { background: var(--primary); border-color: var(--primary-light); transform: scale(1.05); }
-.kw-block.used { opacity: 0.25; pointer-events: none; }
 
 /* ===== SCREEN: FINAL ===== */
 .license-card {
@@ -452,7 +458,7 @@ body {
   margin: 0 auto 16px;
   box-shadow: 0 0 25px rgba(250, 204, 21, 0.7);
 }
-.license-title { font-family: 'Black Han Sans', sans-serif; font-size: 2.2rem; color: var(--accent-yellow); margin-bottom: 6px; }
+.license-title { font-weight: 900; font-size: 2.2rem; color: var(--accent-yellow); margin-bottom: 6px; }
 .license-name-inp {
   background: rgba(255, 255, 255, 0.1);
   border: 2.5px solid var(--primary-light);
@@ -467,7 +473,7 @@ body {
   outline: none;
 }
 .rank-box {
-  font-family: 'Black Han Sans', sans-serif;
+  font-weight: 900;
   font-size: 4.8rem;
   color: #facc15;
   text-shadow: 0 0 25px rgba(250, 204, 21, 0.85);
@@ -489,9 +495,15 @@ body {
   border-radius: var(--radius);
   padding: 36px 30px;
   text-align: center;
-  max-width: 440px; width: 100%;
+  max-width: 460px; width: 100%;
   box-shadow: 0 12px 50px rgba(124, 58, 237, 0.5);
   animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.modal-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
 }
 @keyframes popIn { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
@@ -546,71 +558,64 @@ body {
 <div class="toast" id="toast"></div>
 <canvas class="confetti-canvas" id="confetti-canvas"></canvas>
 
-<!-- STAGE CLEAR / GAME OVER MODAL -->
+<!-- STAGE CLEAR / MODAL (NEXT & PREV BUTTONS ADDED) -->
 <div class="modal-overlay" id="game-modal">
   <div class="modal-box">
     <div style="font-size:4.2rem; margin-bottom:12px;" id="modal-icon">🏆</div>
-    <h2 style="font-family:'Black Han Sans'; font-size:2rem; margin-bottom:10px;" id="modal-title">STAGE CLEAR!</h2>
-    <p style="color:var(--text-muted); font-size:1.15rem; margin-bottom:24px; line-height:1.6;" id="modal-desc">축하합니다! 완벽하게 방어했습니다.</p>
-    <div style="background:rgba(255,255,255,0.08); border-radius:14px; padding:16px 20px; margin-bottom:24px; font-size:1.15rem;">
+    <h2 style="font-weight:900; font-size:2rem; margin-bottom:10px;" id="modal-title">STAGE CLEAR!</h2>
+    <p style="color:var(--text-muted); font-size:1.15rem; margin-bottom:20px; line-height:1.6;" id="modal-desc">축하합니다! 완벽하게 방어했습니다.</p>
+    
+    <div style="background:rgba(255,255,255,0.08); border-radius:14px; padding:16px 20px; margin-bottom:20px; font-size:1.15rem;">
       <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-weight:700;">
         <span>획득 점수</span>
-        <span style="color:var(--accent-yellow); font-weight:900;" id="modal-score">+500 PTS</span>
+        <span style="color:var(--accent-yellow); font-weight:900;" id="modal-score">+500 점</span>
       </div>
       <div style="display:flex; justify-content:space-between; font-weight:700;">
         <span>최고 콤보</span>
-        <span style="color:var(--accent-orange); font-weight:900;" id="modal-combo">x3 COMBO</span>
+        <span style="color:var(--accent-orange); font-weight:900;" id="modal-combo">x3 콤보</span>
       </div>
     </div>
-    <button class="btn btn-primary" id="modal-btn" onclick="handleModalAction()">다음 단계로 🚀</button>
+
+    <div class="modal-btn-group">
+      <button class="btn btn-primary" id="modal-btn-next" onclick="handleModalNext()">다음 단계로 🚀</button>
+      <button class="btn btn-secondary" id="modal-btn-prev" onclick="handleModalPrev()">이전 단계로 🔄</button>
+    </div>
   </div>
 </div>
 
 <!-- ================= SCREEN: START ================= -->
 <div class="screen active" id="s-start">
   <div style="text-align:center; padding: 20px 0;">
-    <div class="stage-badge">🛡️ DESC REFUSAL DEFENSE QUEST</div>
+    <div class="stage-badge">🛡️ REFUSAL DEFENSE QUEST</div>
     <h1 class="hero-title">논리적 거절방패</h1>
-    <p class="hero-desc">유혹의 순간, 논리적 거절(DESC)로 나를 지켜라!<br>4대 관문을 돌파하고 <strong>거절 마스터 면허</strong>를 획득하세요.</p>
+    <p class="hero-desc">유혹의 순간, 논리적 거절로 나를 지켜라!</p>
     
     <div class="quest-road-map">
       <div class="quest-node">
         <div class="quest-node-left">
           <div class="quest-icon">⚡️</div>
-          <div>
-            <div class="quest-name">1단계: 스피드 게임</div>
-            <div class="quest-sub">회피형·분노형·논리형 반사 식별</div>
-          </div>
+          <div class="quest-name">1단계: 스피드 게임</div>
         </div>
         <div class="quest-stars">★☆☆☆</div>
       </div>
       <div class="quest-node">
         <div class="quest-node-left">
           <div class="quest-icon">🎯</div>
-          <div>
-            <div class="quest-name">2단계: 논리적 거절 매칭</div>
-            <div class="quest-sub">상황·감정·제안·결과 고속 매칭</div>
-          </div>
+          <div class="quest-name">2단계: 논리적 거절 매칭</div>
         </div>
         <div class="quest-stars">★★☆☆</div>
       </div>
       <div class="quest-node">
         <div class="quest-node-left">
-          <div class="quest-icon">🧩</div>
-          <div>
-            <div class="quest-name">3단계: 순서 조립 퍼즐</div>
-            <div class="quest-sub">실전 유혹 시나리오 완벽 순서 방어</div>
-          </div>
+          <div class="quest-icon">🧱</div>
+          <div class="quest-name">3단계: 키워드 조합 훈련</div>
         </div>
         <div class="quest-stars">★★★☆</div>
       </div>
       <div class="quest-node">
         <div class="quest-node-left">
           <div class="quest-icon">👑</div>
-          <div>
-            <div class="quest-name">4단계: 실전 배틀</div>
-            <div class="quest-sub">유혹의 보스를 향한 결정적 DESC 반격</div>
-          </div>
+          <div class="quest-name">4단계: 최종 보스 배틀 (문장 퍼즐)</div>
         </div>
         <div class="quest-stars">★★★★</div>
       </div>
@@ -637,9 +642,7 @@ body {
       <div class="sit-text" id="s1-question">"..."</div>
     </div>
 
-    <div class="type-btn-grid" id="s1-options">
-      <!-- Generated in JS -->
-    </div>
+    <div class="type-btn-grid" id="s1-options"></div>
   </div>
 </div>
 
@@ -648,104 +651,76 @@ body {
   <div class="game-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
       <div class="stage-badge">2단계 — 논리적 거절 매칭</div>
-      <div style="font-weight:900; font-size:1.2rem; color:var(--secondary);" id="s2-progress">1 / 6</div>
+      <div style="font-weight:900; font-size:1.2rem; color:var(--secondary);" id="s2-progress">1 / 8</div>
     </div>
     <h2 class="stage-title">🎯 2단계: 논리적 거절 매칭</h2>
     <div class="timer-bar-wrap"><div class="timer-bar-fill" id="s2-timer"></div></div>
 
     <div style="font-size:1.05rem; font-weight:700; color:var(--text-muted); margin-bottom:12px; text-align:center;">
-      아래 문장은 D, E, S, C 중 어느 단계에 해당할까요?
+      아래 문장은 어느 거절 단계에 해당할까요?
     </div>
-    <div class="target-sentence-card" id="s2-target-text">
-      "..."
-    </div>
+    <div class="target-sentence-card" id="s2-target-text">"..."</div>
 
     <div class="desc-part-grid">
       <div class="desc-part-btn btn-d" onclick="handleS2Answer('D')">
-        <span class="part-letter" style="color:#60a5fa;">D</span>
-        <span class="part-label">상황 설명 (Describe)</span>
+        <span class="part-label-main" style="color:#60a5fa;">상황설명</span>
         <span class="part-desc">객관적 사실·상황 말하기</span>
       </div>
       <div class="desc-part-btn btn-e" onclick="handleS2Answer('E')">
-        <span class="part-letter" style="color:#fb923c;">E</span>
-        <span class="part-label">감정/가치 (Express)</span>
+        <span class="part-label-main" style="color:#fb923c;">감정/가치</span>
         <span class="part-desc">내 느낌·소중한 가치 표현</span>
       </div>
       <div class="desc-part-btn btn-s" onclick="handleS2Answer('S')">
-        <span class="part-letter" style="color:#f87171;">S</span>
-        <span class="part-label">구체적 거절 (Specify)</span>
+        <span class="part-label-main" style="color:#f87171;">단호한 거절</span>
         <span class="part-desc">단호한 거절·요청하기</span>
       </div>
       <div class="desc-part-btn btn-c" onclick="handleS2Answer('C')">
-        <span class="part-letter" style="color:#34d399;">C</span>
-        <span class="part-label">결과 제시 (Consequence)</span>
+        <span class="part-label-main" style="color:#34d399;">결과제시</span>
         <span class="part-desc">거절 후의 긍정적 결과/대안</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ================= SCREEN: STAGE 3 ================= -->
+<!-- ================= SCREEN: STAGE 3 (NEW: KEYWORD BUILDER) ================= -->
 <div class="screen" id="s-3">
   <div class="game-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
-      <div class="stage-badge">3단계 — 순서 조립 퍼즐</div>
-      <div style="font-weight:900; font-size:1.2rem; color:var(--secondary);" id="s3-progress">1 / 2</div>
+      <div class="stage-badge">3단계 — 키워드 조합 훈련</div>
+      <div style="font-weight:900; font-size:1.2rem; color:#a78bfa;" id="s3-progress">1 / 4</div>
     </div>
-    <h2 class="stage-title">🧩 3단계: 순서 조립 퍼즐</h2>
+    <h2 class="stage-title">🧱 3단계: 키워드 조합 훈련</h2>
 
-    <div class="chain-indicator">
-      <div class="chain-dot" id="cdot-0">D</div>
-      <span class="chain-arrow">➔</span>
-      <div class="chain-dot" id="cdot-1">E</div>
-      <span class="chain-arrow">➔</span>
-      <div class="chain-dot" id="cdot-2">S</div>
-      <span class="chain-arrow">➔</span>
-      <div class="chain-dot" id="cdot-3">C</div>
-    </div>
+    <div class="attack-builder">
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <span style="font-weight:800; font-size:1.2rem; color:#a78bfa;" id="s3-step-guide">
+          [1단계] 상황설명 대사를 완성하세요!
+        </span>
+      </div>
 
-    <div class="sit-box" style="margin-bottom:18px; padding:18px 20px;">
-      <div class="sit-author" id="s3-sit-title">📍 위험 시나리오</div>
-      <div style="font-size:1.15rem; color:#cbd5e1; line-height:1.55;" id="s3-sit-desc">...</div>
-    </div>
+      <div style="background:rgba(15,23,42,0.85); border:2.5px solid var(--primary); border-radius:var(--radius-sm); padding:16px 20px;">
+        <div id="s3-constructed-text" style="font-size:1.25rem; font-weight:700; min-height:56px; color:#f8fafc; line-height:1.6;">
+          키워드 블록을 터치하여 문장을 완성하세요...
+        </div>
+      </div>
 
-    <!-- 4 Slots -->
-    <div class="slot-container" id="s3-slots">
-      <div class="combo-slot" id="slot-0">
-        <div class="slot-badge d">D</div>
-        <div class="slot-text" id="stext-0">1단계 [상황] 조각을 터치하세요</div>
-      </div>
-      <div class="combo-slot" id="slot-1">
-        <div class="slot-badge e">E</div>
-        <div class="slot-text" id="stext-1">2단계 [감정] 조각을 터치하세요</div>
-      </div>
-      <div class="combo-slot" id="slot-2">
-        <div class="slot-badge s">S</div>
-        <div class="slot-text" id="stext-2">3단계 [거절] 조각을 터치하세요</div>
-      </div>
-      <div class="combo-slot" id="slot-3">
-        <div class="slot-badge c">C</div>
-        <div class="slot-text" id="stext-3">4단계 [결과] 조각을 터치하세요</div>
-      </div>
-    </div>
+      <div class="keyword-blocks" id="s3-keywords"></div>
 
-    <div style="font-size:1.05rem; font-weight:700; color:var(--accent-yellow); margin-bottom:10px;">
-      👇 흩어진 문장 조각을 D ➔ E ➔ S ➔ C 순서대로 터치하세요!
-    </div>
-    <div class="puzzle-cards-pool" id="s3-pool">
-      <!-- Generated in JS -->
+      <button class="btn btn-primary" style="margin-top:14px; font-size:1.3rem; padding:18px;" onclick="checkS3Answer()">
+        문장 완성 제출! 💥
+      </button>
     </div>
   </div>
 </div>
 
-<!-- ================= SCREEN: STAGE 4 ================= -->
+<!-- ================= SCREEN: STAGE 4 (NEW: BOSS BATTLE PUZZLE) ================= -->
 <div class="screen" id="s-4">
   <div class="game-card">
     <div style="display:flex; justify-content:space-between; align-items:center;">
-      <div class="stage-badge">4단계 — 실전 배틀</div>
-      <div style="font-weight:900; font-size:1.2rem; color:#f472b6;">BOSS FIGHT</div>
+      <div class="stage-badge">4단계 — 최종 보스 배틀</div>
+      <div style="font-weight:900; font-size:1.2rem; color:#f472b6;">FINAL BOSS</div>
     </div>
-    <h2 class="stage-title">👑 4단계: 실전 배틀</h2>
+    <h2 class="stage-title">👑 4단계: 최종 보스 배틀</h2>
 
     <div class="boss-card">
       <div class="boss-avatar" id="boss-avatar">😈</div>
@@ -754,31 +729,28 @@ body {
         <div class="boss-hp-fill" id="boss-hp-bar"></div>
       </div>
       <div class="boss-dialog" id="boss-speech">
-        "야, 시험 기간인데 이거 먹으면 잠도 안 오고 집중력 2배야. 너한테만 특별히 주는 거야!"
+        "야, 시험 기간인데 이거 먹으면 잠도 안 오고 하루 만에 살 3kg 빠져. 너만 특별히 주는 거야!"
       </div>
     </div>
 
-    <div class="attack-builder">
-      <div style="display:flex; align-items:center; justify-content:space-between;">
-        <span style="font-weight:800; font-size:1.2rem; color:#a78bfa;" id="s4-step-guide">
-          [1단계] D (상황 묘사) 대사를 완성하세요!
-        </span>
-      </div>
-
-      <div style="background:rgba(15,23,42,0.85); border:2.5px solid var(--primary); border-radius:var(--radius-sm); padding:16px 20px;">
-        <div id="s4-constructed-text" style="font-size:1.25rem; font-weight:700; min-height:56px; color:#f8fafc; line-height:1.6;">
-          키워드 블록을 터치하여 문장을 완성하세요...
-        </div>
-      </div>
-
-      <div class="keyword-blocks" id="s4-keywords">
-        <!-- Generated in JS -->
-      </div>
-
-      <button class="btn btn-primary" style="margin-top:14px; font-size:1.3rem; padding:18px;" id="s4-attack-btn" onclick="fireBossAttack()">
-        DESC 방어 공격 발사! 💥
-      </button>
+    <div class="chain-indicator">
+      <div class="chain-dot" id="cdot-0">1</div><span class="chain-arrow">➔</span>
+      <div class="chain-dot" id="cdot-1">2</div><span class="chain-arrow">➔</span>
+      <div class="chain-dot" id="cdot-2">3</div><span class="chain-arrow">➔</span>
+      <div class="chain-dot" id="cdot-3">4</div>
     </div>
+
+    <div class="slot-container" id="s4-slots">
+      <div class="combo-slot" id="slot-0"><div class="slot-badge d" style="font-size:0.85rem;">상황</div><div class="slot-text" id="stext-0">1단계 [상황설명] 조각 선택</div></div>
+      <div class="combo-slot" id="slot-1"><div class="slot-badge e" style="font-size:0.85rem;">감정</div><div class="slot-text" id="stext-1">2단계 [감정/가치] 조각 선택</div></div>
+      <div class="combo-slot" id="slot-2"><div class="slot-badge s" style="font-size:0.85rem;">거절</div><div class="slot-text" id="stext-2">3단계 [단호한 거절] 조각 선택</div></div>
+      <div class="combo-slot" id="slot-3"><div class="slot-badge c" style="font-size:0.85rem;">결과</div><div class="slot-text" id="stext-3">4단계 [결과제시] 조각 선택</div></div>
+    </div>
+
+    <div style="font-size:1.05rem; font-weight:700; color:var(--accent-yellow); margin-bottom:10px;">
+      👇 보스를 물리칠 완성형 거절 카드를 순서대로 선택하세요!
+    </div>
+    <div class="puzzle-cards-pool" id="s4-pool"></div>
   </div>
 </div>
 
@@ -788,9 +760,8 @@ body {
     <div class="license-card">
       <div class="license-badge">🛡️</div>
       <div class="license-title">거절 마스터 공인 면허증</div>
-      <p style="font-size:1rem; color:var(--text-muted); margin-bottom:12px;">REFUSAL DEFENDER OFFICIAL LICENSE</p>
       
-      <div class="rank-box" id="final-rank">RANK S</div>
+      <div class="rank-box" id="final-rank">S 등급</div>
       
       <div style="margin:16px 0;">
         <label style="font-size:1.05rem; font-weight:700; color:var(--text-muted); display:block; margin-bottom:4px;">면허 소지자 이름 / 닉네임</label>
@@ -798,13 +769,13 @@ body {
       </div>
 
       <div style="background:rgba(255,255,255,0.08); border-radius:14px; padding:20px 24px; text-align:left; font-size:1.1rem; line-height:1.8; margin-bottom:18px;">
-        <div>⭐️ <strong>최종 획득 스코어:</strong> <span style="color:var(--accent-yellow); font-weight:900;" id="final-total-score">0 PTS</span></div>
-        <div>🔥 <strong>최고 연속 콤보:</strong> <span style="color:var(--accent-orange); font-weight:900;" id="final-max-combo">0 COMBO</span></div>
+        <div>⭐️ <strong>최종 획득 스코어:</strong> <span style="color:var(--accent-yellow); font-weight:900;" id="final-total-score">0 점</span></div>
+        <div>🔥 <strong>최고 연속 콤보:</strong> <span style="color:var(--accent-orange); font-weight:900;" id="final-max-combo">0 콤보</span></div>
         <div>📜 <strong>수여 칭호:</strong> <span style="color:#38bdf8; font-weight:900;" id="final-title-text">철벽의 논리 마스터</span></div>
       </div>
 
       <p style="font-size:1.05rem; color:var(--accent-green); font-weight:800; line-height:1.6;">
-        위 사람은 어떠한 부당한 유혹에도 DESC 기법으로 자신을 지킬 수 있음을 인증함.
+        위 사람은 어떠한 부당한 유혹에도 논리적 거절 기법으로 자신을 지킬 수 있음을 인증함.
       </p>
     </div>
 
@@ -815,12 +786,9 @@ body {
 </div>
 
 <script>
-/* ================= AUDIO SYNTHESIZER (WEB AUDIO API) ================= */
+/* ================= AUDIO SYNTHESIZER ================= */
 class SoundEngine {
-  constructor() {
-    this.ctx = null;
-    this.muted = false;
-  }
+  constructor() { this.ctx = null; this.muted = false; }
   init() {
     if (!this.ctx) {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -836,56 +804,35 @@ class SoundEngine {
     const t = this.ctx.currentTime;
     const osc = this.ctx.createOscillator();
     const gain = this.ctx.createGain();
-    osc.connect(gain);
-    gain.connect(this.ctx.destination);
+    osc.connect(gain); gain.connect(this.ctx.destination);
 
     if (type === 'correct') {
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(523.25, t); // C5
-      osc.frequency.setValueAtTime(659.25, t + 0.08); // E5
-      osc.frequency.setValueAtTime(783.99, t + 0.16); // G5
+      osc.frequency.setValueAtTime(523.25, t);
+      osc.frequency.setValueAtTime(659.25, t + 0.08);
       gain.gain.setValueAtTime(0.25, t);
       gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
-      osc.start(t);
-      osc.stop(t + 0.35);
+      osc.start(t); osc.stop(t + 0.35);
     } else if (type === 'wrong') {
       osc.type = 'sawtooth';
       osc.frequency.setValueAtTime(220, t);
       osc.frequency.linearRampToValueAtTime(140, t + 0.25);
       gain.gain.setValueAtTime(0.3, t);
       gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
-      osc.start(t);
-      osc.stop(t + 0.3);
+      osc.start(t); osc.stop(t + 0.3);
     } else if (type === 'combo') {
       osc.type = 'triangle';
       const freq = 440 * Math.pow(1.06, G.combo);
       osc.frequency.setValueAtTime(freq, t);
       gain.gain.setValueAtTime(0.2, t);
       gain.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
-      osc.start(t);
-      osc.stop(t + 0.25);
+      osc.start(t); osc.stop(t + 0.25);
     } else if (type === 'hit') {
       osc.type = 'square';
       osc.frequency.setValueAtTime(180, t);
-      osc.frequency.exponentialRampToValueAtTime(40, t + 0.2);
       gain.gain.setValueAtTime(0.35, t);
       gain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
-      osc.start(t);
-      osc.stop(t + 0.2);
-    } else if (type === 'clear') {
-      const notes = [523.25, 659.25, 783.99, 1046.5];
-      notes.forEach((freq, i) => {
-        const o = this.ctx.createOscillator();
-        const g = this.ctx.createGain();
-        o.connect(g);
-        g.connect(this.ctx.destination);
-        o.type = 'sine';
-        o.frequency.setValueAtTime(freq, t + i * 0.1);
-        g.gain.setValueAtTime(0.25, t + i * 0.1);
-        g.gain.exponentialRampToValueAtTime(0.001, t + i * 0.1 + 0.25);
-        o.start(t + i * 0.1);
-        o.stop(t + i * 0.1 + 0.25);
-      });
+      osc.start(t); osc.stop(t + 0.2);
     }
   }
 }
@@ -899,82 +846,46 @@ function toggleSound() {
 
 /* ================= GAME STATE ================= */
 const G = {
-  score: 0,
-  hp: 3,
-  combo: 0,
-  maxCombo: 0,
-  currentStage: 1,
-
-  // S1
-  s1Idx: 0,
-  s1Timer: null,
-  s1TimeLeft: 100,
-
-  // S2
-  s2Idx: 0,
-  s2Timer: null,
-  s2TimeLeft: 100,
-
-  // S3
-  s3Round: 0,
-  s3Step: 0,
-  s3SelectedItems: [],
-
-  // S4
-  s4Step: 0,
-  s4BossHp: 100,
-  s4Tokens: []
+  score: 0, hp: 3, combo: 0, maxCombo: 0, currentStage: 1,
+  s1Idx: 0, s1Timer: null, s1TimeLeft: 100,
+  s2Idx: 0, s2Timer: null, s2TimeLeft: 100,
+  s3Step: 0, s3Tokens: [],
+  s4Round: 0, s4Step: 0, s4BossHp: 100
 };
 
 /* ================= DATA SETS ================= */
 const DATA_S1 = [
-  {
-    sit: "시험 기간에 친구가 '집중력 엄청 잘 되는 약'이라며 건넬 때:",
-    reply: "“어... 글쎄... 지금은 괜찮은데 다음에 먹어볼게... 딴 애한테 줘봐...”",
-    type: "회피",
-    reason: "애매하게 둘러대면 상대방이 나중에 또 권유합니다!"
-  },
-  {
-    sit: "선배가 '살 쏙 빠지는 특효약'이라며 은밀하게 권유할 때:",
-    reply: "“너 지금 나 살쪘다고 놀리는 거야? 진짜 어이없네, 기분 나쁘니까 저리 가!”",
-    type: "분노",
-    reason: "감정적으로 화를 내면 관계가 깨지고 주도권을 잃습니다!"
-  },
-  {
-    sit: "클럽이나 모임에서 낯선 사람이 음료수에 뭔가를 타서 마셔보라고 할 때:",
-    reply: "“출처를 알 수 없는 음료는 위험해서 마실 수 없어. 내 건강을 위해 거절할게.”",
-    type: "논리",
-    reason: "상황과 이유를 단호하고 명확하게 말하여 주도권을 지킵니다!"
-  },
-  {
-    sit: "친한 친구가 '우리 사이에 의리가 있지, 같이 이거 한번 해보자'고 조를 때:",
-    reply: "“너랑 친한 건 소중하지만 불법 약물은 안 돼. 우리가 오래 친구로 지내려면 이런 건 하지 말자.”",
-    type: "논리",
-    reason: "친구 관계와 거절 이유(DESC)를 명확히 제시한 최고의 거절!"
-  },
-  {
-    sit: "SNS에서 알게 된 사람이 '기분 좋아지는 캔디'라며 무료로 보내주겠다고 할 때:",
-    reply: "“아... 부모님이 보시면 혼날 텐데... 어쩌지... 일단 생각해볼게요.”",
-    type: "회피",
-    reason: "확실하게 선을 긋지 않으면 상대방이 지속적으로 유혹합니다!"
-  }
+  { sit: "시험 기간에 친구가 '집중력 엄청 잘 되는 약'이라며 건넬 때:", reply: "“어... 글쎄... 지금은 괜찮은데 다음에 먹어볼게... 딴 애한테 줘봐...”", type: "회피", reason: "애매하게 둘러대면 상대방이 나중에 또 권유합니다!" },
+  { sit: "선배가 '살 쏙 빠지는 특효약'이라며 은밀하게 권유할 때:", reply: "“너 지금 나 살쪘다고 놀리는 거야? 진짜 어이없네, 기분 나쁘니까 저리 가!”", type: "분노", reason: "감정적으로 화를 내면 관계가 깨지고 주도권을 잃습니다!" },
+  { sit: "클럽이나 모임에서 낯선 사람이 음료수에 뭔가를 타서 마셔보라고 할 때:", reply: "“출처를 알 수 없는 음료는 위험해서 마실 수 없어. 내 건강을 위해 거절할게.”", type: "논리", reason: "상황과 이유를 단호하고 명확하게 말하여 주도권을 지킵니다!" },
+  { sit: "친한 친구가 '우리 사이에 의리가 있지, 같이 이거 한번 해보자'고 조를 때:", reply: "“너랑 친한 건 소중하지만 불법 약물은 안 돼. 우리가 오래 친구로 지내려면 이런 건 하지 말자.”", type: "논리", reason: "친구 관계와 거절 이유를 명확히 제시한 최고의 거절!" },
+  { sit: "SNS에서 알게 된 사람이 '기분 좋아지는 캔디'라며 무료로 보내주겠다고 할 때:", reply: "“아... 부모님이 보시면 혼날 텐데... 어쩌지... 일단 생각해볼게요.”", type: "회피", reason: "확실하게 선을 긋지 않으면 상대방이 지속적으로 유혹합니다!" }
 ];
 
 const DATA_S2 = [
-  { text: "“네가 살 빠지는 약이라며 나한테 건네주고 있잖아.”", type: "D", desc: "객관적 상황 설명" },
-  { text: "“나는 내 몸과 건강을 가장 소중하게 생각해서 불안해.”", type: "E", desc: "나의 감정 및 가치 표현" },
-  { text: "“의사 처방 없는 약은 먹지 않을 테니 다시는 권하지 마.”", type: "S", desc: "구체적 거절 및 요청" },
-  { text: "“약 대신 함께 건강하게 운동하면서 친하게 지내자.”", type: "C", desc: "거절 후 긍정적 결과/대안" },
-  { text: "“시험 기간이라 집중이 잘 안 된다고 불안해하고 있어.”", type: "D", desc: "현재 상황 묘사" },
-  { text: "“약물에 의존하면 내 미래와 건강이 위험해질까 봐 걱정돼.”", type: "E", desc: "내 감정과 걱정 표현" },
-  { text: "“더 이상 이런 위험한 부탁은 하지 않았으면 좋겠어.”", type: "S", desc: "단호한 거절 요청" },
-  { text: "“서로 존중해야 우리가 신뢰할 수 있는 친구로 남을 수 있어.”", type: "C", desc: "관계에 대한 긍정적 결과" }
+  { text: "“네가 살 빠지는 약이라며 나한테 건네주고 있잖아.”", type: "D", desc: "상황설명" },
+  { text: "“나는 내 몸과 건강을 가장 소중하게 생각해서 불안해.”", type: "E", desc: "감정/가치" },
+  { text: "“의사 처방 없는 약은 먹지 않을 테니 다시는 권하지 마.”", type: "S", desc: "단호한 거절" },
+  { text: "“약 대신 함께 건강하게 운동하면서 친하게 지내자.”", type: "C", desc: "결과제시" },
+  { text: "“시험 기간이라 집중이 잘 안 된다고 불안해하고 있어.”", type: "D", desc: "상황설명" },
+  { text: "“약물에 의존하면 내 미래와 건강이 위험해질까 봐 걱정돼.”", type: "E", desc: "감정/가치" },
+  { text: "“더 이상 이런 위험한 부탁은 하지 않았으면 좋겠어.”", type: "S", desc: "단호한 거절" },
+  { text: "“서로 존중해야 우리가 신뢰할 수 있는 친구로 남을 수 있어.”", type: "C", desc: "결과제시" }
 ];
 
+// STAGE 3 (기존 4단계: 키워드 조합)
 const DATA_S3 = [
+  { guide: "[1단계] 상황설명 대사를 완성하세요!", blocks: ["네가 지금", "출처 불분명한", "다이어트약을", "나에게", "건네며 권유하고 있어."], ans: "네가 지금 출처 불분명한 다이어트약을 나에게 건네며 권유하고 있어." },
+  { guide: "[2단계] 감정/가치 대사를 완성하세요!", blocks: ["나는 검증 안 된 약으로", "내 건강과 정신을", "망치고 싶지 않아서", "매우 불안해."], ans: "나는 검증 안 된 약으로 내 건강과 정신을 망치고 싶지 않아서 매우 불안해." },
+  { guide: "[3단계] 단호한 거절 대사를 선언하세요!", blocks: ["의사 처방 없는 약은", "절대 먹지 않을 테니", "다시는 이런 제안", "하지 말아줘."], ans: "의사 처방 없는 약은 절대 먹지 않을 테니 다시는 이런 제안 하지 말아줘." },
+  { guide: "[4단계] 결과제시 대사를 선택하세요!", blocks: ["우리가 서로의 가치관을", "존중해야만", "진짜 좋은 친구로", "남을 수 있어."], ans: "우리가 서로의 가치관을 존중해야만 진짜 좋은 친구로 남을 수 있어." }
+];
+
+// STAGE 4 (기존 3단계: 보스전 문장 퍼즐)
+const DATA_S4 = [
   {
-    title: "📍 상황 1: 다이어트 보조제/불법 식욕억제제 권유",
-    desc: "친구가 온라인에서 구했다며 살이 쉽게 빠지는 약을 함께 먹자고 조르는 상황입니다.",
+    title: "📍 최종 보스 1차전: 불법 식욕억제제 유혹",
+    desc: "보스가 쉽게 살이 빠지는 특효약이라며 약물을 은밀하게 건네는 상황입니다.",
     cards: [
       { l: "D", t: "네가 효과 좋은 다이어트약이라며 나에게 먹어보라고 권하고 있어." },
       { l: "E", t: "나는 검증되지 않은 약물로 건강을 해칠까 봐 두렵고 불안해." },
@@ -983,8 +894,8 @@ const DATA_S3 = [
     ]
   },
   {
-    title: "📍 상황 2: 시험 기간 집중력 향상 의약품 유혹",
-    desc: "공부 잘하는 친구가 병원 처방 없이 ADHD 약을 먹으면 밤샘 공부가 잘된다고 건네는 상황입니다.",
+    title: "📍 최종 보스 2차전: 집중력 향상약 유혹",
+    desc: "보스가 시험 성적을 올릴 수 있다며 처방 없는 약물을 강요하는 상황입니다.",
     cards: [
       { l: "D", t: "네가 처방전 없는 의약품을 집중력 약이라며 나한테 나눠주려 하고 있어." },
       { l: "E", t: "부정행위나 불법 약물 의존으로 내 미래가 망가질까 봐 걱정돼." },
@@ -993,40 +904,6 @@ const DATA_S3 = [
     ]
   }
 ];
-
-const DATA_S4 = {
-  boss: {
-    avatar: "😈",
-    name: "유혹의 보스 [다이어트 마약류]",
-    speech: "“야, 이거 먹으면 밥 안 먹어도 배 안 고프고 하루 만에 3kg 빠져. 너만 특별히 주는 거야, 거절하면 후회한다?”"
-  },
-  steps: [
-    {
-      phase: "D",
-      guide: "1단계: 객관적 상황(Describe)을 정확히 말하세요!",
-      blocks: ["네가 지금", "출처 불분명한", "다이어트약을", "나에게", "건네며 권유하고 있어."],
-      ans: "네가 지금 출처 불분명한 다이어트약을 나에게 건네며 권유하고 있어."
-    },
-    {
-      phase: "E",
-      guide: "2단계: 내 감정과 소중한 가치(Express)를 표현하세요!",
-      blocks: ["나는 검증 안 된 약으로", "내 건강과 정신을", "망치고 싶지 않아서", "매우 불안해."],
-      ans: "나는 검증 안 된 약으로 내 건강과 정신을 망치고 싶지 않아서 매우 불안해."
-    },
-    {
-      phase: "S",
-      guide: "3단계: 단호하고 구체적인 거절(Specify)을 선언하세요!",
-      blocks: ["의사 처방 없는 약은", "절대 먹지 않을 테니", "다시는 이런 제안", "하지 말아줘."],
-      ans: "의사 처방 없는 약은 절대 먹지 않을 테니 다시는 이런 제안 하지 말아줘."
-    },
-    {
-      phase: "C",
-      guide: "4단계: 거절 후의 긍정적 결과(Consequences)를 제시하세요!",
-      blocks: ["우리가 서로의 가치관을", "존중해야만", "진짜 좋은 친구로", "남을 수 있어."],
-      ans: "우리가 서로의 가치관을 존중해야만 진짜 좋은 친구로 남을 수 있어."
-    }
-  ]
-};
 
 /* ================= CORE GAME FUNCTIONS ================= */
 function gotoScreen(id) {
@@ -1040,25 +917,18 @@ function gotoScreen(id) {
 
 function updateHUD() {
   document.getElementById('hud-score').textContent = G.score.toLocaleString();
-  const hpWrap = document.getElementById('hud-hp');
   for (let i = 1; i <= 3; i++) {
     const el = document.getElementById('hp-' + i);
     if (i > G.hp) el.classList.add('lost');
     else el.classList.remove('lost');
   }
-
   const comboEl = document.getElementById('hud-combo');
-  if (G.combo >= 2) {
-    comboEl.style.display = 'block';
-    comboEl.textContent = "🔥 x" + G.combo + " COMBO!";
-  } else {
-    comboEl.style.display = 'none';
-  }
+  comboEl.style.display = G.combo >= 2 ? 'block' : 'none';
+  comboEl.textContent = "🔥 x" + G.combo + " 콤보!";
 }
 
 function addScore(base) {
-  const bonus = G.combo * 20;
-  G.score += base + bonus;
+  G.score += base + (G.combo * 20);
   G.combo++;
   if (G.combo > G.maxCombo) G.maxCombo = G.combo;
   sfx.play('combo');
@@ -1066,57 +936,52 @@ function addScore(base) {
 }
 
 function takeDamage() {
-  G.hp--;
-  G.combo = 0;
-  sfx.play('damage');
-  updateHUD();
+  G.hp--; G.combo = 0; sfx.play('wrong'); updateHUD();
   document.body.classList.add('screen-shake');
   setTimeout(() => document.body.classList.remove('screen-shake'), 400);
 
   if (G.hp <= 0) {
-    toast('💔 하트를 모두 잃었습니다! 점수 페널티 후 부활합니다.');
-    G.hp = 3;
-    G.score = Math.max(0, G.score - 100);
-    updateHUD();
+    toast('💔 하트를 모두 잃었습니다! 점수 감점 후 다시 시도합니다.');
+    G.hp = 3; G.score = Math.max(0, G.score - 100); updateHUD();
   }
 }
 
 function toast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
+  t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-function showModal(title, desc, icon, btnText, action) {
-  sfx.play('clear');
+function showModal(title, desc, icon, nextStageFunc, prevStageFunc) {
   document.getElementById('modal-icon').textContent = icon;
   document.getElementById('modal-title').textContent = title;
   document.getElementById('modal-desc').textContent = desc;
-  document.getElementById('modal-score').textContent = G.score.toLocaleString() + ' PTS';
-  document.getElementById('modal-combo').textContent = 'x' + G.maxCombo + ' COMBO';
-  document.getElementById('modal-btn').textContent = btnText;
-  window.modalCallback = action;
+  document.getElementById('modal-score').textContent = G.score.toLocaleString() + ' 점';
+  document.getElementById('modal-combo').textContent = 'x' + G.maxCombo + ' 콤보';
+  
+  window.modalNextAction = nextStageFunc;
+  window.modalPrevAction = prevStageFunc;
+
+  document.getElementById('modal-btn-prev').style.display = prevStageFunc ? 'inline-flex' : 'none';
   document.getElementById('game-modal').classList.add('visible');
   triggerConfetti();
 }
 
-function handleModalAction() {
+function handleModalNext() {
   document.getElementById('game-modal').classList.remove('visible');
-  if (window.modalCallback) window.modalCallback();
+  if (window.modalNextAction) window.modalNextAction();
 }
 
-/* ================= STAGE 1: SPEED GAME ================= */
-function startStage1() {
-  G.currentStage = 1;
-  G.s1Idx = 0;
-  gotoScreen('s-1');
-  loadS1Question();
+function handleModalPrev() {
+  document.getElementById('game-modal').classList.remove('visible');
+  if (window.modalPrevAction) window.modalPrevAction();
 }
 
+/* ================= STAGE 1 ================= */
+function startStage1() { G.currentStage = 1; G.s1Idx = 0; gotoScreen('s-1'); loadS1Question(); }
 function loadS1Question() {
   if (G.s1Idx >= DATA_S1.length) {
-    showModal('1단계 완료!', '스피드 게임을 훌륭하게 통과했습니다!', '⚡️', '2단계: 논리적 거절 매칭 🎯', () => startStage2());
+    showModal('1단계 완료!', '스피드 게임을 통과했습니다!', '⚡️', () => startStage2(), null);
     return;
   }
   const q = DATA_S1[G.s1Idx];
@@ -1127,7 +992,7 @@ function loadS1Question() {
   const opts = [
     { label: "😓 회피형 거절", type: "회피", sub: "애매하게 거절 → 유혹 반복" },
     { label: "😡 분노형 거절", type: "분노", sub: "감정적 폭발 → 주도권 상실" },
-    { label: "😎 논리형 거절 (DESC)", type: "논리", sub: "DESC 기술 → 관계&주도권 유지" }
+    { label: "😎 논리형 거절", type: "논리", sub: "논리적 방법 → 관계&주도권 유지" }
   ];
 
   const optWrap = document.getElementById('s1-options');
@@ -1140,20 +1005,13 @@ function loadS1Question() {
     optWrap.appendChild(btn);
   });
 
-  // Timer
   clearInterval(G.s1Timer);
   G.s1TimeLeft = 100;
-  const bar = document.getElementById('s1-timer');
-  bar.style.width = '100%';
+  const bar = document.getElementById('s1-timer'); bar.style.width = '100%';
   G.s1Timer = setInterval(() => {
-    G.s1TimeLeft -= 2;
-    bar.style.width = G.s1TimeLeft + '%';
+    G.s1TimeLeft -= 2; bar.style.width = G.s1TimeLeft + '%';
     if (G.s1TimeLeft <= 0) {
-      clearInterval(G.s1Timer);
-      toast('⏰ 시간 초과!');
-      takeDamage();
-      G.s1Idx++;
-      setTimeout(loadS1Question, 800);
+      clearInterval(G.s1Timer); toast('⏰ 시간 초과!'); takeDamage(); G.s1Idx++; setTimeout(loadS1Question, 800);
     }
   }, 160);
 }
@@ -1161,51 +1019,32 @@ function loadS1Question() {
 function handleS1Answer(btn, chosen, correct, reason) {
   clearInterval(G.s1Timer);
   document.querySelectorAll('.type-btn').forEach(b => b.style.pointerEvents = 'none');
-
   if (chosen === correct) {
-    btn.classList.add('correct');
-    sfx.play('correct');
-    addScore(100);
-    toast('✅ 정답! (' + reason + ')');
-    setTimeout(() => { G.s1Idx++; loadS1Question(); }, 900);
+    btn.classList.add('correct'); sfx.play('correct'); addScore(100);
+    toast('✅ 정답! (' + reason + ')'); setTimeout(() => { G.s1Idx++; loadS1Question(); }, 900);
   } else {
-    btn.classList.add('wrong');
-    takeDamage();
-    toast('❌ 오답! 정답은 [' + correct + '형]입니다. (' + reason + ')');
-    setTimeout(() => { G.s1Idx++; loadS1Question(); }, 1400);
+    btn.classList.add('wrong'); takeDamage();
+    toast('❌ 오답! 정답은 [' + correct + '형]입니다.'); setTimeout(() => { G.s1Idx++; loadS1Question(); }, 1400);
   }
 }
 
-/* ================= STAGE 2: LOGICAL REFUSAL MATCHING ================= */
-function startStage2() {
-  G.currentStage = 2;
-  G.s2Idx = 0;
-  gotoScreen('s-2');
-  loadS2Question();
-}
-
+/* ================= STAGE 2 ================= */
+function startStage2() { G.currentStage = 2; G.s2Idx = 0; gotoScreen('s-2'); loadS2Question(); }
 function loadS2Question() {
   if (G.s2Idx >= DATA_S2.length) {
-    showModal('2단계 완료!', '논리적 거절 파츠를 완벽하게 매칭했습니다!', '🎯', '3단계: 순서 조립 퍼즐 🧩', () => startStage3());
+    showModal('2단계 완료!', '거절 파츠를 완벽하게 매칭했습니다!', '🎯', () => startStage3(), () => startStage1());
     return;
   }
   const item = DATA_S2[G.s2Idx];
   document.getElementById('s2-progress').textContent = (G.s2Idx + 1) + ' / ' + DATA_S2.length;
   document.getElementById('s2-target-text').textContent = item.text;
 
-  clearInterval(G.s2Timer);
-  G.s2TimeLeft = 100;
-  const bar = document.getElementById('s2-timer');
-  bar.style.width = '100%';
+  clearInterval(G.s2Timer); G.s2TimeLeft = 100;
+  const bar = document.getElementById('s2-timer'); bar.style.width = '100%';
   G.s2Timer = setInterval(() => {
-    G.s2TimeLeft -= 2.5;
-    bar.style.width = G.s2TimeLeft + '%';
+    G.s2TimeLeft -= 2.5; bar.style.width = G.s2TimeLeft + '%';
     if (G.s2TimeLeft <= 0) {
-      clearInterval(G.s2Timer);
-      toast('⏰ 시간 초과!');
-      takeDamage();
-      G.s2Idx++;
-      setTimeout(loadS2Question, 600);
+      clearInterval(G.s2Timer); toast('⏰ 시간 초과!'); takeDamage(); G.s2Idx++; setTimeout(loadS2Question, 600);
     }
   }, 160);
 }
@@ -1213,56 +1052,88 @@ function loadS2Question() {
 function handleS2Answer(chosen) {
   clearInterval(G.s2Timer);
   const correct = DATA_S2[G.s2Idx].type;
+  const descName = DATA_S2[G.s2Idx].desc;
   if (chosen === correct) {
-    sfx.play('correct');
-    addScore(120);
-    toast('✅ 완벽한 파츠 매칭! (' + DATA_S2[G.s2Idx].desc + ')');
+    sfx.play('correct'); addScore(120); toast('✅ 완벽한 매칭! [' + descName + '] 단계입니다.');
   } else {
-    takeDamage();
-    toast('❌ 오답! 해당 문장은 [' + correct + '] 파츠입니다.');
+    takeDamage(); toast('❌ 오답! 해당 문장은 [' + descName + '] 단계입니다.');
   }
-  G.s2Idx++;
-  setTimeout(loadS2Question, 800);
+  G.s2Idx++; setTimeout(loadS2Question, 800);
 }
 
-/* ================= STAGE 3: ORDER PUZZLE ================= */
-function startStage3() {
-  G.currentStage = 3;
-  G.s3Round = 0;
-  gotoScreen('s-3');
-  loadS3Round();
-}
-
-function loadS3Round() {
-  if (G.s3Round >= DATA_S3.length) {
-    showModal('3단계 완료!', '순서 조립 퍼즐을 완벽하게 해결했습니다!', '🛡️', '4단계: 실전 배틀로 👑', () => startStage4());
+/* ================= STAGE 3 (NEW: KEYWORD BUILDER) ================= */
+function startStage3() { G.currentStage = 3; G.s3Step = 0; gotoScreen('s-3'); loadS3Step(); }
+function loadS3Step() {
+  if (G.s3Step >= DATA_S3.length) {
+    showModal('3단계 완료!', '키워드 조합 훈련을 성공적으로 마쳤습니다!', '🧱', () => startStage4(), () => startStage2());
     return;
   }
-  const data = DATA_S3[G.s3Round];
-  document.getElementById('s3-progress').textContent = (G.s3Round + 1) + ' / ' + DATA_S3.length;
-  document.getElementById('s3-sit-title').textContent = data.title;
-  document.getElementById('s3-sit-desc').textContent = data.desc;
+  document.getElementById('s3-progress').textContent = (G.s3Step + 1) + ' / ' + DATA_S3.length;
+  const stepData = DATA_S3[G.s3Step];
+  document.getElementById('s3-step-guide').textContent = stepData.guide;
+  document.getElementById('s3-constructed-text').textContent = '키워드 블록을 터치하여 문장을 완성하세요...';
+  document.getElementById('s3-constructed-text').style.color = '#94a3b8';
+  G.s3Tokens = [];
 
-  G.s3Step = 0;
-  G.s3SelectedItems = [];
-  updateChainIndicators();
+  const shuffled = [...stepData.blocks].sort(() => Math.random() - 0.5);
+  const container = document.getElementById('s3-keywords'); container.innerHTML = '';
+  shuffled.forEach(word => {
+    const el = document.createElement('div');
+    el.className = 'kw-block'; el.textContent = word;
+    el.onclick = () => {
+      if (el.classList.contains('used')) return;
+      el.classList.add('used'); G.s3Tokens.push(word);
+      const textEl = document.getElementById('s3-constructed-text');
+      textEl.textContent = G.s3Tokens.join(' '); textEl.style.color = '#f8fafc';
+      sfx.play('combo');
+    };
+    container.appendChild(el);
+  });
+}
 
-  const labels = ['D-상황','E-감정','S-거절','C-결과'];
-  for (let i = 0; i < 4; i++) {
-    const sl = document.getElementById('slot-' + i);
-    sl.className = 'combo-slot';
-    document.getElementById('stext-' + i).textContent = (i + 1) + '단계 [' + labels[i] + '] 조각을 터치하세요';
+function checkS3Answer() {
+  if (G.s3Tokens.length === 0) { toast('먼저 키워드 블록을 조합하세요!'); return; }
+  const currentSentence = G.s3Tokens.join(' ');
+  const target = DATA_S3[G.s3Step].ans;
+
+  if (currentSentence === target) {
+    sfx.play('hit'); addScore(200); toast('💥 완벽한 문장 조합 성공!');
+    G.s3Step++; setTimeout(loadS3Step, 800);
+  } else {
+    takeDamage(); toast('⚠️ 문장 구성이 어색합니다! 다시 블록을 눌러보세요.');
+    document.querySelectorAll('.kw-block').forEach(b => b.classList.remove('used'));
+    G.s3Tokens = []; document.getElementById('s3-constructed-text').textContent = '키워드 블록을 터치하여 문장을 완성하세요...';
+  }
+}
+
+/* ================= STAGE 4 (NEW: BOSS BATTLE PUZZLE) ================= */
+function startStage4() { G.currentStage = 4; G.s4Round = 0; G.s4BossHp = 100; gotoScreen('s-4'); loadS4Round(); }
+function loadS4Round() {
+  const bossHpBar = document.getElementById('boss-hp-bar');
+  if (G.s4Round >= DATA_S4.length) {
+    bossHpBar.style.width = '0%'; sfx.play('hit');
+    showModal('최종 보스 완파 (K.O.)!', '보스의 강력한 유혹을 완벽한 논리로 물리쳤습니다!', '👑', () => showFinalScreen(), () => startStage3());
+    return;
   }
 
-  // Shuffle cards
+  bossHpBar.style.width = (G.s4BossHp) + '%';
+  const data = DATA_S4[G.s4Round];
+  document.getElementById('boss-speech').textContent = '"' + data.desc + '"';
+
+  G.s4Step = 0; updateChainIndicators();
+
+  const labels = ['상황설명','감정/가치','단호한 거절','결과제시'];
+  for (let i = 0; i < 4; i++) {
+    document.getElementById('slot-' + i).className = 'combo-slot';
+    document.getElementById('stext-' + i).textContent = (i + 1) + '단계 [' + labels[i] + '] 조각 선택';
+  }
+
   const shuffled = [...data.cards].sort(() => Math.random() - 0.5);
-  const pool = document.getElementById('s3-pool');
-  pool.innerHTML = '';
-  shuffled.forEach((c, idx) => {
+  const pool = document.getElementById('s4-pool'); pool.innerHTML = '';
+  shuffled.forEach(c => {
     const el = document.createElement('div');
-    el.className = 'pcard';
-    el.textContent = c.t;
-    el.onclick = () => handleS3CardClick(el, c.l);
+    el.className = 'pcard'; el.textContent = c.t;
+    el.onclick = () => handleS4CardClick(el, c.l);
     pool.appendChild(el);
   });
 }
@@ -1271,162 +1142,66 @@ function updateChainIndicators() {
   for (let i = 0; i < 4; i++) {
     const dot = document.getElementById('cdot-' + i);
     dot.className = 'chain-dot';
-    if (i < G.s3Step) dot.classList.add('done');
-    else if (i === G.s3Step) dot.classList.add('active');
+    if (i < G.s4Step) dot.classList.add('done');
+    else if (i === G.s4Step) dot.classList.add('active');
   }
 }
 
-function handleS3CardClick(cardEl, letter) {
-  const expected = ['D', 'E', 'S', 'C'][G.s3Step];
+function handleS4CardClick(cardEl, letter) {
+  const expected = ['D', 'E', 'S', 'C'][G.s4Step];
+  const names = ['상황설명', '감정/가치', '단호한 거절', '결과제시'];
   if (letter === expected) {
-    sfx.play('correct');
-    cardEl.classList.add('used');
-    const slot = document.getElementById('slot-' + G.s3Step);
+    sfx.play('correct'); cardEl.classList.add('used');
+    const slot = document.getElementById('slot-' + G.s4Step);
     slot.classList.add('filled', 'correct');
-    document.getElementById('stext-' + G.s3Step).textContent = cardEl.textContent;
-    addScore(150);
-    G.s3Step++;
-    updateChainIndicators();
+    document.getElementById('stext-' + G.s4Step).textContent = cardEl.textContent;
+    addScore(250); G.s4Step++; updateChainIndicators();
 
-    if (G.s3Step === 4) {
-      toast('💥 4-CHAIN COMBO! 유혹을 단호하게 튕겨냈습니다!');
-      sfx.play('hit');
-      setTimeout(() => {
-        G.s3Round++;
-        loadS3Round();
-      }, 1200);
+    if (G.s4Step === 4) {
+      toast('💥 보스 타격 성공! 유혹을 물리쳤습니다!');
+      G.s4BossHp -= 50;
+      setTimeout(() => { G.s4Round++; loadS4Round(); }, 1200);
     }
   } else {
-    takeDamage();
-    cardEl.classList.add('wrong');
+    takeDamage(); cardEl.classList.add('wrong');
     setTimeout(() => cardEl.classList.remove('wrong'), 500);
-    toast('❌ 순서가 맞지 않습니다! 지금은 [' + expected + '] 단계 조각을 찾아야 합니다.');
+    toast('❌ 순서가 맞지 않습니다! 지금은 [' + names[G.s4Step] + '] 조각을 찾아야 합니다.');
   }
 }
 
-/* ================= STAGE 4: BOSS BATTLE ================= */
-function startStage4() {
-  G.currentStage = 4;
-  G.s4Step = 0;
-  G.s4BossHp = 100;
-  gotoScreen('s-4');
-  loadS4Step();
-}
-
-function loadS4Step() {
-  const bossHpBar = document.getElementById('boss-hp-bar');
-
-  if (G.s4Step >= DATA_S4.steps.length) {
-    G.s4BossHp = 0;
-    bossHpBar.style.width = '0%';
-    sfx.play('hit');
-    showModal('보스 완전 격파 (K.O.)!', '실전 배틀에서 보스를 DESC 논리로 굴복시켰습니다!', '👑', '면허증 발급받기 📜', () => showFinalScreen());
-    return;
-  }
-
-  bossHpBar.style.width = G.s4BossHp + '%';
-  const stepData = DATA_S4.steps[G.s4Step];
-  document.getElementById('s4-step-guide').textContent = stepData.guide;
-  document.getElementById('s4-constructed-text').textContent = '키워드 블록을 터치하여 문장을 완성하세요...';
-  document.getElementById('s4-constructed-text').style.color = '#94a3b8';
-  G.s4Tokens = [];
-
-  const shuffledBlocks = [...stepData.blocks].sort(() => Math.random() - 0.5);
-  const kwContainer = document.getElementById('s4-keywords');
-  kwContainer.innerHTML = '';
-  shuffledBlocks.forEach(word => {
-    const el = document.createElement('div');
-    el.className = 'kw-block';
-    el.textContent = word;
-    el.onclick = () => {
-      if (el.classList.contains('used')) return;
-      el.classList.add('used');
-      G.s4Tokens.push(word);
-      const textEl = document.getElementById('s4-constructed-text');
-      textEl.textContent = G.s4Tokens.join(' ');
-      textEl.style.color = '#f8fafc';
-      sfx.play('combo');
-    };
-    kwContainer.appendChild(el);
-  });
-}
-
-function fireBossAttack() {
-  if (G.s4Tokens.length === 0) {
-    toast('먼저 키워드 블록을 조합하세요!');
-    return;
-  }
-  const currentSentence = G.s4Tokens.join(' ');
-  const target = DATA_S4.steps[G.s4Step].ans;
-
-  if (currentSentence === target) {
-    sfx.play('hit');
-    G.s4BossHp -= 25;
-    addScore(250);
-    toast('💥 크리티컬 히트! 보스에게 강력한 DESC 일격을 날렸습니다!');
-    document.getElementById('boss-avatar').classList.add('screen-shake');
-    setTimeout(() => document.getElementById('boss-avatar').classList.remove('screen-shake'), 400);
-
-    G.s4Step++;
-    setTimeout(loadS4Step, 800);
-  } else {
-    takeDamage();
-    toast('⚠️ 문장 구성이 어색합니다! 다시 블록을 눌러보세요.');
-    document.querySelectorAll('.kw-block').forEach(b => b.classList.remove('used'));
-    G.s4Tokens = [];
-    document.getElementById('s4-constructed-text').textContent = '키워드 블록을 터치하여 문장을 완성하세요...';
-  }
-}
-
-/* ================= FINAL SCREEN & RESTART ================= */
+/* ================= FINAL SCREEN ================= */
 function showFinalScreen() {
   gotoScreen('s-final');
-  document.getElementById('final-total-score').textContent = G.score.toLocaleString() + ' PTS';
-  document.getElementById('final-max-combo').textContent = 'x' + G.maxCombo + ' COMBO';
+  document.getElementById('final-total-score').textContent = G.score.toLocaleString() + ' 점';
+  document.getElementById('final-max-combo').textContent = 'x' + G.maxCombo + ' 콤보';
 
-  let rank = 'RANK A';
+  let rank = 'A 등급';
   let title = '철벽의 논리 디펜더';
-  if (G.score >= 1800) { rank = 'RANK S'; title = '전국 거절협회 공인 거절의 달인 🏆'; }
-  else if (G.score < 1100) { rank = 'RANK B'; title = '성장하는 거절 수습생 🛡️'; }
+  if (G.score >= 2000) { rank = 'S 등급'; title = '전국 거절협회 공인 거절의 달인 🏆'; }
+  else if (G.score < 1200) { rank = 'B 등급'; title = '성장하는 거절 수습생 🛡️'; }
 
   document.getElementById('final-rank').textContent = rank;
   document.getElementById('final-title-text').textContent = title;
   triggerConfetti();
 }
 
-function startGame() {
-  sfx.init();
-  G.score = 0;
-  G.hp = 3;
-  G.combo = 0;
-  G.maxCombo = 0;
-  updateHUD();
-  startStage1();
-}
+function startGame() { sfx.init(); G.score = 0; G.hp = 3; G.combo = 0; G.maxCombo = 0; updateHUD(); startStage1(); }
+function restartGame() { gotoScreen('s-start'); }
 
-function restartGame() {
-  gotoScreen('s-start');
-}
-
-/* ================= CONFETTI EFFECT ================= */
+/* ================= CONFETTI ================= */
 function triggerConfetti() {
   const canvas = document.getElementById('confetti-canvas');
   const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
 
   const particles = [];
   const colors = ['#7c3aed', '#06b6d4', '#10b981', '#facc15', '#ef4444'];
   for (let i = 0; i < 70; i++) {
     particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * -canvas.height,
-      r: Math.random() * 6 + 4,
-      d: Math.random() * 40 + 10,
+      x: Math.random() * canvas.width, y: Math.random() * -canvas.height,
+      r: Math.random() * 6 + 4, d: Math.random() * 40 + 10,
       color: colors[Math.floor(Math.random() * colors.length)],
-      tilt: Math.floor(Math.random() * 10) - 10,
-      tiltAngleInc: (Math.random() * 0.07) + 0.05,
-      tiltAngle: 0
+      tilt: Math.floor(Math.random() * 10) - 10, tiltAngleInc: (Math.random() * 0.07) + 0.05, tiltAngle: 0
     });
   }
 
@@ -1434,28 +1209,19 @@ function triggerConfetti() {
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => {
-      p.tiltAngle += p.tiltAngleInc;
-      p.y += (Math.cos(p.d) + 3 + p.r / 2) / 1.5;
+      p.tiltAngle += p.tiltAngleInc; p.y += (Math.cos(p.d) + 3 + p.r / 2) / 1.5;
       p.tilt = Math.sin(p.tiltAngle - (p.d / 3)) * 15;
-      ctx.beginPath();
-      ctx.lineWidth = p.r / 2;
-      ctx.strokeStyle = p.color;
-      ctx.moveTo(p.x + p.tilt + (p.r / 4), p.y);
-      ctx.lineTo(p.x + p.tilt, p.y + p.tilt + (p.r / 4));
+      ctx.beginPath(); ctx.lineWidth = p.r / 2; ctx.strokeStyle = p.color;
+      ctx.moveTo(p.x + p.tilt + (p.r / 4), p.y); ctx.lineTo(p.x + p.tilt, p.y + p.tilt + (p.r / 4));
       ctx.stroke();
     });
     animationFrame = requestAnimationFrame(draw);
   }
   draw();
-  setTimeout(() => {
-    cancelAnimationFrame(animationFrame);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }, 4000);
+  setTimeout(() => { cancelAnimationFrame(animationFrame); ctx.clearRect(0, 0, canvas.width, canvas.height); }, 4000);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  updateHUD();
-});
+document.addEventListener('DOMContentLoaded', () => { updateHUD(); });
 </script>
 </body>
 </html>
