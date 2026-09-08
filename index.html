@@ -1532,7 +1532,7 @@ async function loadRanking(myName) {
   }
 }
 
-function startGame() { sfx.init(); BGM.init(); G.score = 0; G.hp = 3; G.combo = 0; G.maxCombo = 0; updateHUD(); startStage1(); }
+function startGame() { sfx.init(); G.score = 0; G.hp = 3; G.combo = 0; G.maxCombo = 0; updateHUD(); startStage1(); }
 function restartGame() { BGM.play('start'); gotoScreen('s-start'); }
 
 /* ================= CONFETTI ================= */
@@ -1570,9 +1570,7 @@ function triggerConfetti() {
 
 document.addEventListener('DOMContentLoaded', () => {
   updateHUD();
-  /* 첫 클릭/터치 시 시작화면 BGM 재생 (브라우저 자동재생 정책) */
   const startBGM = () => {
-    BGM.init();
     BGM.play('start');
     document.removeEventListener('click', startBGM);
     document.removeEventListener('touchstart', startBGM);
