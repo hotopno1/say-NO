@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>논리적 거절방패 🛡️ — 거절 훈련 아케이드</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* 시스템 폰트 우선 사용 — 오프라인/네트워크 제한 환경에서도 정상 작동 */
+  body, input, button { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', 'Noto Sans KR', sans-serif !important; }
+</style>
 <style>
 :root {
   --primary: #7c3aed;
@@ -25,7 +28,7 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', 'Noto Sans KR', sans-serif;
   background-color: var(--bg-dark);
   background-image: 
     radial-gradient(at 0% 0%, rgba(124, 58, 237, 0.22) 0px, transparent 50%),
@@ -152,7 +155,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', 'Noto Sans KR', sans-serif;
   font-weight: 800;
   font-size: 1.2rem;
   padding: 18px 36px;
@@ -181,7 +184,7 @@ body {
 
 /* ===== SCREEN: START ===== */
 .hero-title {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', 'Noto Sans KR', sans-serif;
   font-weight: 900;
   font-size: clamp(2.8rem, 6vw, 4.2rem);
   line-height: 1.2;
@@ -223,7 +226,7 @@ body {
 .quest-name { font-weight: 900; font-size: 1.4rem; color: #fff; letter-spacing: -0.3px; }
 .quest-stars { color: var(--accent-yellow); font-size: 1.2rem; letter-spacing: 4px; font-weight: 900; }
 
-/* ===== STAGE 1: SPEED GAME ===== */
+/* ===== STAGE 1: 가로 3열 카드 레이아웃 ===== */
 .sit-box {
   background: rgba(15, 23, 42, 0.85);
   border: 2.5px solid #3b82f6;
@@ -235,37 +238,66 @@ body {
 .sit-author { font-size: 1rem; font-weight: 800; color: #38bdf8; margin-bottom: 10px; }
 .sit-text { font-size: 1.35rem; font-weight: 700; line-height: 1.6; color: #f8fafc; }
 
+/* ★ 수정: 가로 3열 그리드 ★ */
 .type-btn-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 14px;
 }
+
+/* ★ 수정: 세로 카드형 ★ */
 .type-btn {
   background: rgba(30, 41, 59, 0.95);
   border: 2.5px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-sm);
-  padding: 18px 22px;
+  padding: 28px 16px;
   color: #fff;
   font-weight: 800;
-  font-size: 1.2rem;
-  display: grid;
-  grid-template-columns: 220px 1fr 260px;
-  align-items: center;
+  font-size: 1.05rem;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 14px;
   cursor: pointer;
   transition: all 0.15s ease;
+  width: 100%;
+  min-height: 170px;
+  text-align: center;
 }
-.type-btn:hover { background: rgba(51, 65, 85, 0.95); border-color: var(--primary-light); transform: translateX(6px); }
+.type-btn:hover { background: rgba(51, 65, 85, 0.95); border-color: var(--primary-light); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(124,58,237,0.3); }
 .type-btn.correct { background: #065f46 !important; border-color: #34d399 !important; color: #a7f3d0 !important; }
 .type-btn.wrong { background: #991b1b !important; border-color: #f87171 !important; color: #fecaca !important; animation: shake 0.4s; }
-.type-btn-sub { font-size: 0.95rem; color: var(--text-muted); text-align: right; }
 
-@media (max-width: 768px) {
-  .type-btn {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-  .type-btn-sub { text-align: left; }
+/* ★ 수정: 타이틀 중앙 정렬 ★ */
+.type-btn-title {
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.15rem;
+  line-height: 1.4;
 }
+
+/* ★ 수정: 구분선 역할 ★ */
+.type-btn-divider {
+  width: 40px;
+  height: 2px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 99px;
+}
+
+/* ★ 수정: 설명 텍스트 중앙 정렬, 줄바꿈 허용 ★ */
+.type-btn-sub {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 600;
+  white-space: normal;
+  word-break: keep-all;
+  line-height: 1.5;
+}
+
+/* spacer 숨김 */
+.type-btn-spacer { display: none; }
 
 /* ===== STAGE 2: MATCHING ===== */
 .target-sentence-card {
@@ -543,6 +575,41 @@ body {
   0% { transform: scale(0.95); } 50% { transform: scale(1.05); } 100% { transform: scale(1); }
 }
 .confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+
+/* ===== RANKING BOARD ===== */
+.rank-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  transition: background 0.2s;
+}
+.rank-row:hover { background: rgba(255,255,255,0.1); }
+.rank-row.me { border-color: var(--accent-yellow); background: rgba(250,204,21,0.1); }
+.rank-row.rank-1 { border-color: #facc15; background: rgba(250,204,21,0.12); }
+.rank-row.rank-2 { border-color: #94a3b8; background: rgba(148,163,184,0.1); }
+.rank-row.rank-3 { border-color: #f97316; background: rgba(249,115,22,0.1); }
+.rank-num {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 1.1rem; flex-shrink: 0;
+  background: rgba(255,255,255,0.1);
+  color: var(--text-muted);
+}
+.rank-row.rank-1 .rank-num { background: #facc15; color: #1e1b4b; }
+.rank-row.rank-2 .rank-num { background: #94a3b8; color: #0f172a; }
+.rank-row.rank-3 .rank-num { background: #f97316; color: #fff; }
+.rank-name { font-weight: 800; font-size: 1.15rem; flex: 1; }
+.rank-grade {
+  font-size: 0.85rem; font-weight: 700;
+  padding: 3px 12px; border-radius: 99px;
+  background: rgba(124,58,237,0.25); color: var(--primary-light);
+}
+.rank-score { font-weight: 900; font-size: 1.2rem; color: var(--accent-yellow); min-width: 80px; text-align: right; }
 </style>
 </head>
 <body>
@@ -789,7 +856,24 @@ body {
       </p>
     </div>
 
-    <button class="btn btn-primary" style="padding:18px; font-size:1.25rem;" onclick="restartGame()">
+    <!-- 랭킹 등록 버튼 -->
+    <button class="btn btn-primary" style="padding:18px; font-size:1.25rem; margin-bottom:12px;" onclick="submitRanking()">
+      🏆 랭킹보드에 등록하기
+    </button>
+    <div id="ranking-msg" style="font-size:1rem; font-weight:700; min-height:28px; margin-bottom:14px; color:var(--accent-green);"></div>
+
+    <!-- 랭킹보드 카드 -->
+    <div class="game-card" style="text-align:left; margin-bottom:20px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+        <div style="font-weight:900; font-size:1.4rem;">🏅 거절방패 랭킹보드</div>
+        <button onclick="loadRanking()" style="background:rgba(255,255,255,0.1); border:1.5px solid rgba(255,255,255,0.25); color:#fff; border-radius:99px; padding:6px 18px; font-size:0.9rem; font-weight:700; cursor:pointer;">새로고침 🔄</button>
+      </div>
+      <div id="ranking-board">
+        <div style="text-align:center; color:var(--text-muted); padding:20px 0;">불러오는 중...</div>
+      </div>
+    </div>
+
+    <button class="btn btn-secondary" style="padding:18px; font-size:1.25rem;" onclick="restartGame()">
       다시 도전하여 랭크 올리기 🔄
     </button>
   </div>
@@ -852,7 +936,142 @@ function toggleSound() {
   sfx.muted = !sfx.muted;
   document.getElementById('hud-sound-btn').textContent = sfx.muted ? '🔇' : '🔊';
   toast(sfx.muted ? '사운드가 꺼졌습니다' : '사운드가 켜졌습니다');
+  BGM.setMute(sfx.muted);
+  if (!sfx.muted) BGM.play(BGM.current);
 }
+
+/* ================= BGM ENGINE (mp3 파일 방식) ================= */
+const BGM = {
+  audio: null,
+  current: null,
+
+  /* 단계별 음원 파일 매핑 */
+  tracks: {
+    start:  null,               /* 시작화면: Web Audio 합성 유지 */
+    stage1: 'Random_Battle.mp3',
+    stage2: 'battle-mus.mp3',
+    stage3: 'battle-mus.mp3',
+    stage4: 'The_Battle_of_Atheria.mp3',
+    final:  null                /* 최종화면: Web Audio 합성 유지 */
+  },
+
+  stop() {
+    if (this.audio) {
+      this.audio.pause();
+      this.audio.currentTime = 0;
+    }
+    /* Web Audio 합성 BGM 정지 */
+    if (this._nodes) {
+      this._nodes.forEach(n => { try { n.stop(); } catch(e){} });
+      this._nodes = [];
+    }
+    this._loopTimer && clearTimeout(this._loopTimer);
+  },
+
+  play(name) {
+    if (!name) return;
+    this.current = name;
+    this.stop();
+    if (sfx.muted) return;
+
+    const file = this.tracks[name];
+
+    if (file) {
+      /* mp3 파일 재생 */
+      if (!this.audio) this.audio = new Audio();
+      this.audio.src = file;
+      this.audio.loop = true;
+      this.audio.volume = 0.35;
+      this.audio.play().catch(() => {});
+    } else {
+      /* Web Audio 합성 (시작/최종화면) */
+      this[name] && this[name]();
+    }
+  },
+
+  setMute(muted) {
+    if (this.audio) this.audio.muted = muted;
+    if (muted) {
+      if (this._nodes) this._nodes.forEach(n => { try { n.stop(); } catch(e){} });
+    } else {
+      if (!this.tracks[this.current]) {
+        this[this.current] && this[this.current]();
+      }
+    }
+  },
+
+  /* ── Web Audio 유틸 (시작/최종화면용) ── */
+  _ctx: null, _nodes: [], _loopTimer: null,
+
+  _getCtx() {
+    if (!this._ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) this._ctx = new AC();
+    }
+    if (this._ctx && this._ctx.state === 'suspended') this._ctx.resume();
+    return this._ctx;
+  },
+
+  _osc(freq, type, vol, start, dur, dest) {
+    const ctx = this._getCtx(); if (!ctx) return;
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = type; o.frequency.value = freq;
+    g.gain.setValueAtTime(0, start);
+    g.gain.linearRampToValueAtTime(vol, start + 0.02);
+    g.gain.linearRampToValueAtTime(0, start + dur - 0.02);
+    o.connect(g); g.connect(dest);
+    o.start(start); o.stop(start + dur);
+    this._nodes.push(o);
+  },
+
+  _master(vol) {
+    const ctx = this._getCtx(); if (!ctx) return null;
+    const g = ctx.createGain();
+    g.gain.value = vol || 0.15;
+    g.connect(ctx.destination);
+    return g;
+  },
+
+  /* 시작화면: 잔잔한 Ambient */
+  start() {
+    const ctx = this._getCtx(); if (!ctx) return;
+    const m = this._master(0.13);
+    const loop = () => {
+      if (this.current !== 'start' || sfx.muted) return;
+      const t = ctx.currentTime;
+      [261.6, 329.6, 392, 523.3].forEach((f, i) => {
+        this._osc(f, 'sine', 0.2, t + i*1.5, 2.8, m);
+        this._osc(f/2, 'sine', 0.07, t + i*1.5, 3.2, m);
+      });
+      this._loopTimer = setTimeout(loop, 7000);
+    };
+    loop();
+  },
+
+  /* 최종화면: 승리 팡파레 + 밝은 루프 */
+  final() {
+    const ctx = this._getCtx(); if (!ctx) return;
+    const m = this._master(0.16);
+    const fanfare = [523.3, 659.3, 783.9, 1046.5];
+    fanfare.forEach((f, i) => {
+      this._osc(f, 'sine', 0.3, ctx.currentTime + i*0.18, 0.5, m);
+      this._osc(f, 'triangle', 0.12, ctx.currentTime + i*0.18, 0.5, m);
+    });
+    this._loopTimer = setTimeout(() => {
+      if (this.current !== 'final' || sfx.muted) return;
+      const loop = () => {
+        if (this.current !== 'final' || sfx.muted) return;
+        const t = ctx.currentTime;
+        [523.3,659.3,783.9,659.3,698.5,587.3,659.3,523.3].forEach((f,i) => {
+          this._osc(f, 'sine', 0.16, t + i*0.38, 0.34, m);
+          this._osc(f/2, 'sine', 0.06, t + i*0.38, 0.34, m);
+        });
+        this._loopTimer = setTimeout(loop, 8*0.38*1000 - 20);
+      };
+      loop();
+    }, 2000);
+  }
+};
 
 /* ================= GAME STATE ================= */
 const G = {
@@ -865,25 +1084,24 @@ const G = {
 
 /* ================= DATA SETS ================= */
 const DATA_S1 = [
-  { sit: "시험 기간에 친구가 '집중력 엄청 잘 되는 약'이라며 건넬 때:", reply: "“어... 글쎄... 지금은 괜찮은데 다음에 먹어볼게... 딴 애한테 줘봐...”", type: "회피", reason: "애매하게 둘러대면 상대방이 나중에 또 권유합니다!" },
-  { sit: "선배가 '살 쏙 빠지는 특효약'이라며 은밀하게 권유할 때:", reply: "“너 지금 나 살쪘다고 놀리는 거야? 진짜 어이없네, 기분 나쁘니까 저리 가!”", type: "분노", reason: "감정적으로 화를 내면 관계가 깨지고 주도권을 잃습니다!" },
-  { sit: "클럽이나 모임에서 낯선 사람이 음료수에 뭔가를 타서 마셔보라고 할 때:", reply: "“출처를 알 수 없는 음료는 위험해서 마실 수 없어. 내 건강을 위해 거절할게.”", type: "논리", reason: "상황과 이유를 단호하고 명확하게 말하여 주도권을 지킵니다!" },
-  { sit: "친한 친구가 '우리 사이에 의리가 있지, 같이 이거 한번 해보자'고 조를 때:", reply: "“너랑 친한 건 소중하지만 불법 약물은 안 돼. 우리가 오래 친구로 지내려면 이런 건 하지 말자.”", type: "논리", reason: "친구 관계와 거절 이유를 명확히 제시한 최고의 거절!" },
-  { sit: "SNS에서 알게 된 사람이 '기분 좋아지는 캔디'라며 무료로 보내주겠다고 할 때:", reply: "“아... 부모님이 보시면 혼날 텐데... 어쩌지... 일단 생각해볼게요.”", type: "회피", reason: "확실하게 선을 긋지 않으면 상대방이 지속적으로 유혹합니다!" }
+  { sit: "시험 기간에 친구가 '집중력 엄청 잘 되는 약'이라며 건넬 때:", reply: "「어... 글쎄... 지금은 괜찮은데 다음에 먹어볼게... 딴 애한테 줘봐...」", type: "회피", reason: "애매하게 둘러대면 상대방이 나중에 또 권유합니다!" },
+  { sit: "선배가 '살 쏙 빠지는 특효약'이라며 은밀하게 권유할 때:", reply: "「너 지금 나 살쪘다고 놀리는 거야? 진짜 어이없네, 기분 나쁘니까 저리 가!」", type: "분노", reason: "감정적으로 화를 내면 관계가 깨지고 주도권을 잃습니다!" },
+  { sit: "클럽이나 모임에서 낯선 사람이 음료수에 뭔가를 타서 마셔보라고 할 때:", reply: "「출처를 알 수 없는 음료는 위험해서 마실 수 없어. 내 건강을 위해 거절할게.」", type: "논리", reason: "상황과 이유를 단호하고 명확하게 말하여 주도권을 지킵니다!" },
+  { sit: "친한 친구가 '우리 사이에 의리가 있지, 같이 이거 한번 해보자'고 조를 때:", reply: "「너랑 친한 건 소중하지만 불법 약물은 안 돼. 우리가 오래 친구로 지내려면 이런 건 하지 말자.」", type: "논리", reason: "친구 관계와 거절 이유를 명확히 제시한 최고의 거절!" },
+  { sit: "SNS에서 알게 된 사람이 '기분 좋아지는 캔디'라며 무료로 보내주겠다고 할 때:", reply: "「아... 부모님이 보시면 혼날 텐데... 어쩌지... 일단 생각해볼게요.」", type: "회피", reason: "확실하게 선을 긋지 않으면 상대방이 지속적으로 유혹합니다!" }
 ];
 
 const DATA_S2 = [
-  { text: "“네가 살 빠지는 약이라며 나한테 건네주고 있잖아.”", type: "D", desc: "상황설명" },
-  { text: "“나는 내 몸과 건강을 가장 소중하게 생각해서 불안해.”", type: "E", desc: "감정/가치" },
-  { text: "“의사 처방 없는 약은 먹지 않을 테니 다시는 권하지 마.”", type: "S", desc: "단호한 거절" },
-  { text: "“약 대신 함께 건강하게 운동하면서 친하게 지내자.”", type: "C", desc: "결과제시" },
-  { text: "“시험 기간이라 집중이 잘 안 된다고 불안해하고 있어.”", type: "D", desc: "상황설명" },
-  { text: "“약물에 의존하면 내 미래와 건강이 위험해질까 봐 걱정돼.”", type: "E", desc: "감정/가치" },
-  { text: "“더 이상 이런 위험한 부탁은 하지 않았으면 좋겠어.”", type: "S", desc: "단호한 거절" },
-  { text: "“서로 존중해야 우리가 신뢰할 수 있는 친구로 남을 수 있어.”", type: "C", desc: "결과제시" }
+  { text: "「네가 살 빠지는 약이라며 나한테 건네주고 있잖아.」", type: "D", desc: "상황설명" },
+  { text: "「나는 내 몸과 건강을 가장 소중하게 생각해서 불안해.」", type: "E", desc: "감정/가치" },
+  { text: "「의사 처방 없는 약은 먹지 않을 테니 다시는 권하지 마.」", type: "S", desc: "단호한 거절" },
+  { text: "「약 대신 함께 건강하게 운동하면서 친하게 지내자.」", type: "C", desc: "결과제시" },
+  { text: "「시험 기간이라 집중이 잘 안 된다고 불안해하고 있어.」", type: "D", desc: "상황설명" },
+  { text: "「약물에 의존하면 내 미래와 건강이 위험해질까 봐 걱정돼.」", type: "E", desc: "감정/가치" },
+  { text: "「더 이상 이런 위험한 부탁은 하지 않았으면 좋겠어.」", type: "S", desc: "단호한 거절" },
+  { text: "「서로 존중해야 우리가 신뢰할 수 있는 친구로 남을 수 있어.」", type: "C", desc: "결과제시" }
 ];
 
-/* ===== STAGE 3: 복수 정답을 인정하도록 ansList로 수정 ===== */
 const DATA_S3 = [
   { 
     guide: "[1단계] 상황설명 대사를 완성하세요!", 
@@ -892,7 +1110,9 @@ const DATA_S3 = [
       "네가 지금 나에게 출처 불분명한 다이어트약을 건네며 권유하고 있어.",
       "네가 지금 출처 불분명한 다이어트약을 나에게 건네며 권유하고 있어.",
       "출처 불분명한 다이어트약을 네가 지금 나에게 건네며 권유하고 있어.",
-      "나에게 네가 지금 출처 불분명한 다이어트약을 건네며 권유하고 있어."
+      "출처 불분명한 다이어트약을 나에게 네가 지금 건네며 권유하고 있어.",
+      "나에게 네가 지금 출처 불분명한 다이어트약을 건네며 권유하고 있어.",
+      "나에게 출처 불분명한 다이어트약을 네가 지금 건네며 권유하고 있어."
     ]
   },
   { 
@@ -1017,7 +1237,7 @@ function handleModalPrev() {
 }
 
 /* ================= STAGE 1 ================= */
-function startStage1() { G.currentStage = 1; G.s1Idx = 0; gotoScreen('s-1'); loadS1Question(); }
+function startStage1() { G.currentStage = 1; G.s1Idx = 0; gotoScreen('s-1'); BGM.play('stage1'); loadS1Question(); }
 function loadS1Question() {
   if (G.s1Idx >= DATA_S1.length) {
     showModal('1단계 완료!', '스피드 게임을 통과했습니다!', '⚡️', () => startStage2(), null);
@@ -1029,9 +1249,9 @@ function loadS1Question() {
   document.getElementById('s1-question').textContent = q.reply;
 
   const opts = [
-    { label: "😓 회피형 거절", type: "회피", sub: "애매하게 거절 ➔ 유혹 반복" },
-    { label: "😡 분노형 거절", type: "분노", sub: "감정적 폭발 ➔ 주도권 상실" },
-    { label: "😎 논리형 거절", type: "논리", sub: "논리적 방법 ➔ 관계&주도권 유지" }
+    { label: "😓 회피형 거절", type: "회피", sub: "애매하게 거절\n➔ 유혹 반복" },
+    { label: "😡 분노형 거절", type: "분노", sub: "감정적 폭발\n➔ 주도권 상실" },
+    { label: "😎 논리형 거절", type: "논리", sub: "논리적 방법\n➔ 관계&주도권 유지" }
   ];
 
   const optWrap = document.getElementById('s1-options');
@@ -1039,7 +1259,10 @@ function loadS1Question() {
   opts.forEach(opt => {
     const btn = document.createElement('div');
     btn.className = 'type-btn';
-    btn.innerHTML = '<span>' + opt.label + '</span><div></div><span class="type-btn-sub">' + opt.sub + '</span>';
+    btn.innerHTML =
+      '<span class="type-btn-title">' + opt.label + '</span>' +
+      '<div class="type-btn-divider"></div>' +
+      '<span class="type-btn-sub">' + opt.sub + '</span>';
     btn.onclick = () => handleS1Answer(btn, opt.type, q.type, q.reason);
     optWrap.appendChild(btn);
   });
@@ -1068,7 +1291,7 @@ function handleS1Answer(btn, chosen, correct, reason) {
 }
 
 /* ================= STAGE 2 ================= */
-function startStage2() { G.currentStage = 2; G.s2Idx = 0; gotoScreen('s-2'); loadS2Question(); }
+function startStage2() { G.currentStage = 2; G.s2Idx = 0; gotoScreen('s-2'); BGM.play('stage2'); loadS2Question(); }
 function loadS2Question() {
   if (G.s2Idx >= DATA_S2.length) {
     showModal('2단계 완료!', '거절 파츠를 완벽하게 매칭했습니다!', '🎯', () => startStage3(), () => startStage1());
@@ -1101,7 +1324,7 @@ function handleS2Answer(chosen) {
 }
 
 /* ================= STAGE 3 ================= */
-function startStage3() { G.currentStage = 3; G.s3Step = 0; gotoScreen('s-3'); loadS3Step(); }
+function startStage3() { G.currentStage = 3; G.s3Step = 0; gotoScreen('s-3'); BGM.play('stage3'); loadS3Step(); }
 function loadS3Step() {
   if (G.s3Step >= DATA_S3.length) {
     showModal('3단계 완료!', '키워드 조합 훈련을 성공적으로 마쳤습니다!', '🧱', () => startStage4(), () => startStage2());
@@ -1132,10 +1355,9 @@ function loadS3Step() {
 
 function checkS3Answer() {
   if (G.s3Tokens.length === 0) { toast('먼저 키워드 블록을 조합하세요!'); return; }
-  const currentSentence = G.s3Tokens.join(' ');
+  const currentSentence = G.s3Tokens.join(' ').trim();
   const validAnswers = DATA_S3[G.s3Step].ansList;
 
-  // 복수 정답 목록 중 하나라도 일치하는지 판별
   if (validAnswers.includes(currentSentence)) {
     sfx.play('hit'); addScore(200); toast('💥 완벽한 문장 조합 성공!');
     G.s3Step++; setTimeout(loadS3Step, 800);
@@ -1147,7 +1369,7 @@ function checkS3Answer() {
 }
 
 /* ================= STAGE 4 ================= */
-function startStage4() { G.currentStage = 4; G.s4Round = 0; G.s4BossHp = 100; gotoScreen('s-4'); loadS4Round(); }
+function startStage4() { G.currentStage = 4; G.s4Round = 0; G.s4BossHp = 100; gotoScreen('s-4'); BGM.play('stage4'); loadS4Round(); }
 function loadS4Round() {
   const bossHpBar = document.getElementById('boss-hp-bar');
   if (G.s4Round >= DATA_S4.length) {
@@ -1212,6 +1434,7 @@ function handleS4CardClick(cardEl, letter) {
 /* ================= FINAL SCREEN ================= */
 function showFinalScreen() {
   gotoScreen('s-final');
+  BGM.play('final');
   document.getElementById('final-total-score').textContent = G.score.toLocaleString() + ' 점';
   document.getElementById('final-max-combo').textContent = 'x' + G.maxCombo + ' 콤보';
 
@@ -1222,11 +1445,95 @@ function showFinalScreen() {
 
   document.getElementById('final-rank').textContent = rank;
   document.getElementById('final-title-text').textContent = title;
+  document.getElementById('ranking-msg').textContent = '';
+  G.currentRank = rank;
+  G.currentTitle = title;
+
   triggerConfetti();
+  loadRanking();
 }
 
-function startGame() { sfx.init(); G.score = 0; G.hp = 3; G.combo = 0; G.maxCombo = 0; updateHUD(); startStage1(); }
-function restartGame() { gotoScreen('s-start'); }
+/* ================= RANKING BOARD (Google Sheets 연동) ================= */
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxynqi_FDxNNWwhRZneQon6_2Dp_QA0D_nhcO438bUYeKbwMcdS1eEU5dK05d6idVHlDA/exec';
+
+async function submitRanking() {
+  const name = document.getElementById('final-user-name').value.trim() || '익명의 디펜더';
+  const msgEl = document.getElementById('ranking-msg');
+
+  msgEl.style.color = '#94a3b8';
+  msgEl.textContent = '⏳ 저장 중...';
+
+  const entry = {
+    name: name,
+    score: G.score,
+    combo: G.maxCombo,
+    rank: G.currentRank || 'A 등급',
+    title: G.currentTitle || '철벽의 논리 디펜더',
+    time: new Date().toLocaleString('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
+  };
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(entry)
+    });
+    msgEl.style.color = 'var(--accent-green)';
+    msgEl.textContent = '✅ 랭킹보드에 등록되었습니다!';
+    setTimeout(() => loadRanking(name), 1200);
+  } catch(err) {
+    msgEl.style.color = '#f87171';
+    msgEl.textContent = '⚠️ 저장 중 오류가 발생했습니다. 네트워크를 확인해주세요.';
+    console.error(err);
+  }
+}
+
+async function loadRanking(myName) {
+  const board = document.getElementById('ranking-board');
+  board.innerHTML = '<div style="text-align:center; color:var(--text-muted); padding:20px 0;">⏳ 불러오는 중...</div>';
+
+  try {
+    const res = await fetch(APPS_SCRIPT_URL + '?t=' + Date.now());
+    const rankings = await res.json();
+
+    if (!rankings || rankings.length === 0) {
+      board.innerHTML = '<div style="text-align:center; color:var(--text-muted); padding:24px 0; font-size:1rem;">아직 등록된 기록이 없습니다.<br>첫 번째 랭킹 등록자가 되세요! 🏆</div>';
+      return;
+    }
+
+    const rankEmoji = ['🥇', '🥈', '🥉'];
+    const gradeColor = { 'S 등급': '#facc15', 'A 등급': '#a78bfa', 'B 등급': '#38bdf8' };
+    const myNameNow = myName || document.getElementById('final-user-name').value.trim();
+
+    board.innerHTML = rankings.map((entry, i) => {
+      const isMe = entry.name === myNameNow;
+      const rowClass = isMe ? 'rank-row me' : (i < 3 ? `rank-row rank-${i+1}` : 'rank-row');
+      const numDisplay = i < 3 ? rankEmoji[i] : (i + 1);
+      const gcolor = gradeColor[entry.rank] || '#a78bfa';
+      const score = Number(entry.score).toLocaleString();
+      return `
+        <div class="${rowClass}">
+          <div class="rank-num">${numDisplay}</div>
+          <div style="flex:1; min-width:0;">
+            <div class="rank-name">${entry.name}${isMe ? ' <span style="font-size:0.8rem;color:var(--accent-yellow);">◀ 나</span>' : ''}</div>
+            <div style="font-size:0.85rem; color:var(--text-muted); margin-top:2px;">${entry.title} · ${entry.time}</div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+            <div class="rank-score">${score} 점</div>
+            <div class="rank-grade" style="background:${gcolor}22; color:${gcolor};">${entry.rank}</div>
+          </div>
+        </div>`;
+    }).join('');
+
+  } catch(err) {
+    board.innerHTML = '<div style="text-align:center; color:#f87171; padding:20px 0;">랭킹을 불러오는 데 실패했습니다.<br><span style="font-size:0.9rem;color:var(--text-muted);">잠시 후 새로고침 버튼을 눌러보세요.</span></div>';
+    console.error(err);
+  }
+}
+
+function startGame() { sfx.init(); BGM.init(); G.score = 0; G.hp = 3; G.combo = 0; G.maxCombo = 0; updateHUD(); startStage1(); }
+function restartGame() { BGM.play('start'); gotoScreen('s-start'); }
 
 /* ================= CONFETTI ================= */
 function triggerConfetti() {
@@ -1261,7 +1568,18 @@ function triggerConfetti() {
   setTimeout(() => { cancelAnimationFrame(animationFrame); ctx.clearRect(0, 0, canvas.width, canvas.height); }, 4000);
 }
 
-document.addEventListener('DOMContentLoaded', () => { updateHUD(); });
+document.addEventListener('DOMContentLoaded', () => {
+  updateHUD();
+  /* 첫 클릭/터치 시 시작화면 BGM 재생 (브라우저 자동재생 정책) */
+  const startBGM = () => {
+    BGM.init();
+    BGM.play('start');
+    document.removeEventListener('click', startBGM);
+    document.removeEventListener('touchstart', startBGM);
+  };
+  document.addEventListener('click', startBGM);
+  document.addEventListener('touchstart', startBGM);
+});
 </script>
 </body>
 </html>
