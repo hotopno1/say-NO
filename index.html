@@ -977,14 +977,16 @@ const BGM = {
     const file = this.tracks[name];
 
     if (file) {
-      /* mp3 파일 재생 */
       if (!this.audio) this.audio = new Audio();
       this.audio.src = file;
       this.audio.loop = true;
       this.audio.volume = 0.35;
-      this.audio.play().catch(() => {});
+      this.audio.play().then(() => {
+        console.log('BGM 재생 성공:', file);
+      }).catch(err => {
+        console.warn('BGM 재생 실패:', file, err);
+      });
     } else {
-      /* Web Audio 합성 (시작/최종화면) */
       this[name] && this[name]();
     }
   },
@@ -1532,7 +1534,12 @@ async function loadRanking(myName) {
   }
 }
 
-function startGame() { sfx.init(); G.score = 0; G.hp = 3; G.combo = 0; G.maxCombo = 0; updateHUD(); startStage1(); }
+function startGame() {
+  sfx.init();
+  G.score = 0; G.hp = 3; G.combo = 0; G.maxCombo = 0;
+  updateHUD();
+  startStage1();
+}
 function restartGame() { BGM.play('start'); gotoScreen('s-start'); }
 
 /* ================= CONFETTI ================= */
@@ -1568,16 +1575,7 @@ function triggerConfetti() {
   setTimeout(() => { cancelAnimationFrame(animationFrame); ctx.clearRect(0, 0, canvas.width, canvas.height); }, 4000);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  updateHUD();
-  const startBGM = () => {
-    BGM.play('start');
-    document.removeEventListener('click', startBGM);
-    document.removeEventListener('touchstart', startBGM);
-  };
-  document.addEventListener('click', startBGM);
-  document.addEventListener('touchstart', startBGM);
-});
+document.addEventListener('DOMContentLoaded', () => { updateHUD(); });
 </script>
 </body>
 </html>
