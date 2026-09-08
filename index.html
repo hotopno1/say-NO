@@ -250,7 +250,7 @@ body {
   background: rgba(30, 41, 59, 0.95);
   border: 2.5px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-sm);
-  padding: 28px 16px;
+  padding: 28px 12px;
   color: #fff;
   font-weight: 800;
   font-size: 1.05rem;
@@ -262,19 +262,20 @@ body {
   cursor: pointer;
   transition: all 0.15s ease;
   width: 100%;
-  min-height: 170px;
+  min-height: 190px;
   text-align: center;
 }
 .type-btn:hover { background: rgba(51, 65, 85, 0.95); border-color: var(--primary-light); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(124,58,237,0.3); }
 .type-btn.correct { background: #065f46 !important; border-color: #34d399 !important; color: #a7f3d0 !important; }
 .type-btn.wrong { background: #991b1b !important; border-color: #f87171 !important; color: #fecaca !important; animation: shake 0.4s; }
 
-/* ★ 수정: 타이틀 중앙 정렬 ★ */
+/* ★ 수정: 타이틀 글씨 크게 ★ */
 .type-btn-title {
   text-align: center;
   font-weight: 900;
-  font-size: 1.15rem;
+  font-size: 1.45rem;
   line-height: 1.4;
+  word-break: keep-all;
 }
 
 /* ★ 수정: 구분선 역할 ★ */
@@ -285,19 +286,16 @@ body {
   border-radius: 99px;
 }
 
-/* ★ 수정: 설명 텍스트 중앙 정렬, 줄바꿈 허용 ★ */
+/* ★ 수정: 설명 텍스트 크게 ★ */
 .type-btn-sub {
-  font-size: 0.88rem;
+  font-size: 1.1rem;
   color: var(--text-muted);
   text-align: center;
-  font-weight: 600;
+  font-weight: 700;
   white-space: normal;
   word-break: keep-all;
-  line-height: 1.5;
+  line-height: 1.6;
 }
-
-/* spacer 숨김 */
-.type-btn-spacer { display: none; }
 
 /* ===== STAGE 2: MATCHING ===== */
 .target-sentence-card {
@@ -1273,7 +1271,7 @@ function loadS1Question() {
   G.s1TimeLeft = 100;
   const bar = document.getElementById('s1-timer'); bar.style.width = '100%';
   G.s1Timer = setInterval(() => {
-    G.s1TimeLeft -= 2; bar.style.width = G.s1TimeLeft + '%';
+    G.s1TimeLeft -= 0.64; bar.style.width = G.s1TimeLeft + '%';
     if (G.s1TimeLeft <= 0) {
       clearInterval(G.s1Timer); toast('⏰ 시간 초과!'); takeDamage(); G.s1Idx++; setTimeout(loadS1Question, 800);
     }
@@ -1306,7 +1304,7 @@ function loadS2Question() {
   clearInterval(G.s2Timer); G.s2TimeLeft = 100;
   const bar = document.getElementById('s2-timer'); bar.style.width = '100%';
   G.s2Timer = setInterval(() => {
-    G.s2TimeLeft -= 2.5; bar.style.width = G.s2TimeLeft + '%';
+    G.s2TimeLeft -= 0.8; bar.style.width = G.s2TimeLeft + '%';
     if (G.s2TimeLeft <= 0) {
       clearInterval(G.s2Timer); toast('⏰ 시간 초과!'); takeDamage(); G.s2Idx++; setTimeout(loadS2Question, 600);
     }
